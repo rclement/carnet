@@ -1,6 +1,9 @@
 import os
+import sys
 
 from setuptools import setup
+from setuptools.command.test import test as TestCommand
+from codecs import open
 
 
 here = os.path.abspath(os.path.dirname(__file__))
@@ -8,6 +11,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 packages = ['carnet']
 
 requires = [
+    'blinker',
     'flask',
     'flask-bootstrap',
     'flask-flatpages',
@@ -16,6 +20,17 @@ requires = [
     'flask-wtf',
     'frozen-flask',
     'pygments'
+]
+
+test_requires = [
+    'coverage',
+    'docutils',
+    'flake8',
+    'flask-testing',
+    'pytest',
+    'pytest-cov',
+    'sphinx',
+    'tox'
 ]
 
 entry_points = {
@@ -31,6 +46,21 @@ with open(os.path.join(here, 'carnet', '__about__.py'), mode='r', encoding='utf-
 with open('README.rst', mode='r', encoding='utf-8') as f:
     readme = f.read()
 
+
+class ToxTest(TestCommand):
+
+    def finalize_options(self):
+        TestCommand.finalize_options(self)
+        self.test_args = []
+        self.test_suite = True
+
+    def run_tests(self):
+        # import here, cause outside the eggs aren't loaded
+        import tox
+        errcode = tox.cmdline(self.test_args)
+        sys.exit(errcode)
+
+
 setup(
     name=about['__title__'],
     version=about['__version__'],
@@ -42,6 +72,8 @@ setup(
     long_description=readme,
     packages=packages,
     install_requires=requires,
+    test_requires=test_requires,
+    cmdclass={'test': ToxTest},
     entry_points=entry_points,
     classifiers=[
         'Operating System :: OS Independent',

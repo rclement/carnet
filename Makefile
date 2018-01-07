@@ -1,6 +1,6 @@
 PROJECT = carnet
 DOCS_DIR = docs
-TEST_DIR = test
+TEST_DIR = tests
 
 .PHONY: init develop lock dist install docs-generate docs test test-all lint readme-rst pypi-register pypi-upload pypi-test-register pypi-test-upload clean help
 
@@ -36,7 +36,7 @@ test-all:
 	python setup.py test
 
 lint:
-	pipenv run flake8 $(PROJECT)
+	pipenv run flake8 --ignore=E501,F401 $(PROJECT)
 
 readme-rst:
 	pandoc --from=markdown --to=rst README.md -o README.rst

@@ -32,10 +32,12 @@ class DevelopmentConfig(Config):
 class TestingConfig(Config):
     DEBUG = True
     TESTING = True
+    WTF_CSRF_ENABLED = False
 
 
-def app_config():
-    env_config = os.getenv('FLASK_CONFIG', 'default')
+def app_config(config=None):
+    if config is None:
+        config = os.getenv('FLASK_CONFIG', 'default')
 
     configs = {
         'production': ProductionConfig,
@@ -44,4 +46,4 @@ def app_config():
         'default': ProductionConfig,
     }
 
-    return configs.get(env_config)
+    return configs.get(config)

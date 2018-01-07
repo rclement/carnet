@@ -1,6 +1,7 @@
 import os
 import json
 
+from codecs import open
 from flask import current_app
 
 

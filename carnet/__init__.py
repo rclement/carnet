@@ -3,6 +3,7 @@ import os.path
 import string
 
 from base64 import b64encode
+from codecs import open
 from flask import Flask, redirect, render_template, request, url_for
 from flask_flatpages import FlatPages
 from flask_bootstrap import Bootstrap
@@ -35,7 +36,8 @@ def create_instance_config(instance_config_file):
             f.write(instance_config_text)
 
 
-def create_app(static_folder=None, template_folder=None, instance_path=None):
+def create_app(config='default', static_folder=None, template_folder=None,
+               instance_path=None):
     app_kwargs = {}
 
     if static_folder:
@@ -49,7 +51,7 @@ def create_app(static_folder=None, template_folder=None, instance_path=None):
 
     instance_config_file = os.path.join(app.instance_path, 'config.py')
     create_instance_config(instance_config_file)
-    app.config.from_object(app_config())
+    app.config.from_object(app_config(config))
     app.config.from_pyfile(instance_config_file)
 
     pages.init_app(app)
