@@ -89,6 +89,9 @@ def create_app(config='default', static_folder=None, template_folder=None,
 
     @app.errorhandler(404)
     def page_not_found(error):
-        return render_template('404.html'), 404
+        from .utils.data import get_global_config
+        return render_template(
+            '404.html', global_config=get_global_config
+        ), 404
 
     return app
