@@ -119,5 +119,5 @@ Copyright (c) 2018 Romain Clement
 
 .. |Build Status| image:: https://travis-ci.org/rclement/carnet.svg?branch=develop
    :target: https://travis-ci.org/rclement/carnet
-.. |Coverage Status| image:: https://coveralls.io/repos/rclement/carnet/badge.png?branch=develop
-   :target: https://coveralls.io/r/rclement/carnet?branch=develop
+.. |Coverage Status| image:: https://coveralls.io/repos/github/rclement/carnet/badge.svg?branch=develop
+   :target: https://coveralls.io/github/rclement/carnet?branch=develop

@@ -1,7 +1,7 @@
 # carnet
 
 [![Build Status](https://travis-ci.org/rclement/carnet.svg?branch=develop)](https://travis-ci.org/rclement/carnet)
-[![Coverage Status](https://coveralls.io/repos/rclement/carnet/badge.png?branch=develop)](https://coveralls.io/r/rclement/carnet?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/github/rclement/carnet/badge.svg?branch=develop)](https://coveralls.io/github/rclement/carnet?branch=develop)
 
 Static website generator framework.
 
