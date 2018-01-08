@@ -42,7 +42,7 @@ def get_latest_posts(offset=0):
 
     num_posts = len(sorted_posts)
     post_per_page = current_app.config.get('POSTS_PER_PAGE', 10)
-    post_page_max = int(math.ceil(num_posts / post_per_page) - 1)
+    post_page_max = int(num_posts / post_per_page)
 
     post_page = max(min(offset, post_page_max), 0)
     start = min(num_posts, post_per_page * post_page)

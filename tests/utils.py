@@ -1,7 +1,23 @@
 import os
 import json
+import shutil
 
-from carnet.utils.config import get_app_config_path
+from carnet import create_app
+from carnet.utils.config import absolute_path, get_app_config_path
+
+
+def cleanup_folders():
+    def _delete_folder(path):
+        folder = absolute_path(path)
+        if os.path.isdir(folder):
+            shutil.rmtree(folder)
+
+    folders = [
+        'instance', 'pages', 'posts', 'output'
+    ]
+
+    for f in folders:
+        _delete_folder(f)
 
 
 def test_app_config():
@@ -26,3 +42,10 @@ def delete_app_config():
     app_config_path = get_app_config_path()
     if os.path.isfile(app_config_path):
         os.remove(app_config_path)
+
+
+def create_test_app():
+    cleanup_folders()
+    return create_app(
+        config_name='testing'
+    )

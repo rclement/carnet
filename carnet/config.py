@@ -35,10 +35,7 @@ class TestingConfig(Config):
     WTF_CSRF_ENABLED = False
 
 
-def app_config(config=None):
-    if config is None:
-        config = os.getenv('FLASK_CONFIG', 'default')
-
+def app_config(config='default'):
     configs = {
         'production': ProductionConfig,
         'development': DevelopmentConfig,

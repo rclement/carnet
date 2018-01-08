@@ -31,12 +31,15 @@ def create_instance_config(instance_config_file):
         }
         instance_config_text = instance_template.substitute(instance_values)
 
-        os.makedirs(os.path.dirname(instance_config_file))
+        instance_dir = os.path.dirname(instance_config_file)
+        if not os.path.isdir(instance_dir):
+            os.makedirs(instance_dir)
+
         with open(instance_config_file, mode='w', encoding='utf-8') as f:
             f.write(instance_config_text)
 
 
-def create_app(config='default', static_folder=None, template_folder=None,
+def create_app(config_name='default', static_folder=None, template_folder=None,
                instance_path=None):
     app_kwargs = {}
 
@@ -51,7 +54,7 @@ def create_app(config='default', static_folder=None, template_folder=None,
 
     instance_config_file = os.path.join(app.instance_path, 'config.py')
     create_instance_config(instance_config_file)
-    app.config.from_object(app_config(config))
+    app.config.from_object(app_config(config_name))
     app.config.from_pyfile(instance_config_file)
 
     pages.init_app(app)

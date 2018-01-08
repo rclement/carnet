@@ -2,7 +2,7 @@ import unittest
 
 from flask_testing import TestCase
 
-from carnet import create_app
+from tests.utils import create_test_app, cleanup_folders
 
 
 class TestHome(TestCase):
@@ -15,8 +15,10 @@ class TestHome(TestCase):
         )
 
     def create_app(self):
-        app = create_app(config='testing')
-        return app
+        return create_test_app()
+
+    def tearDown(self):
+        cleanup_folders()
 
     def test_quickstart_empty(self):
         rv = self.post_quickstart({})
