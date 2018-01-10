@@ -25,7 +25,7 @@ def test_app_config():
         'title': 'My Title',
         'subtitle': 'My subtitle',
         'author': 'Me, Myself and I',
-        'theme': '',
+        'theme': 'default',
         'pages_path': 'pages',
         'posts_path': 'posts',
         'output_path': 'output',
