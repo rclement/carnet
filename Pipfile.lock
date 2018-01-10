@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "2e4a29acc98cfe3b746416576f60e905a71a702b92344a6186fd136fc8e44e21"
+            "sha256": "5879c3fc6e6510a87c01b260fc8b6c01121e9d956774d3c8dfe69d9dc02f2420"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -79,6 +79,10 @@
             ],
             "version": "==2.0.6"
         },
+        "flask-themes": {
+            "editable": true,
+            "path": "git+https://github.com/rclement/flask-themes.git@fix-integration-flask-0.12#egg=flask_themes"
+        },
         "flask-wtf": {
             "hashes": [
                 "sha256:d9a9e366b32dcbb98ef17228e76be15702cd2600675668bca23f63a7947fd5ac",
@@ -144,6 +148,13 @@
                 "sha256:5ac82e411044fb129bae5cfbeb3ba626acb2af31a8d17d175004b70862a741a7"
             ],
             "version": "==3.12"
+        },
+        "six": {
+            "hashes": [
+                "sha256:832dc0e10feb1aa2c68dcc57dbb658f1c7e65b9b61af69048abc87a2db00a0eb",
+                "sha256:70e8a77beed4562e7f14fe23a786b54f6296e34344c23bc42f07b15018ff98e9"
+            ],
+            "version": "==1.11.0"
         },
         "visitor": {
             "hashes": [
@@ -277,10 +288,6 @@
             "editable": true,
             "path": "."
         },
-        "fd61203": {
-            "editable": true,
-            "path": "../flask-themes/."
-        },
         "flake8": {
             "hashes": [
                 "sha256:c7841163e2b576d435799169b78703ad6ac1bbb0f199994fc05f700b2a90ea37",
@@ -326,6 +333,12 @@
                 "sha256:dc076623d7d850653a018cb64f500948334c8aeb6b10a5a842bf1bcfb98122bc"
             ],
             "version": "==0.7.1"
+        },
+        "flask-themes": {
+            "hashes": [
+                "sha256:0586fdd29a4ccfaa37effc92652a3fe50c6a37d929493d5ab7b4b747be08d9fc"
+            ],
+            "version": "==0.1.3"
         },
         "flask-wtf": {
             "hashes": [

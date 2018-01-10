@@ -13,6 +13,7 @@ flask-bootstrap = "*"
 flask-flatpages = "*"
 flask-moment = "*"
 flask-script = "*"
+flask_themes = {path = "git+https://github.com/rclement/flask-themes.git@fix-integration-flask-0.12#egg=flask_themes", editable = true}
 flask-wtf = "*"
 frozen-flask = "*"
 pygments = "*"
@@ -29,7 +30,6 @@ pytest-cov = "*"
 sphinx = "*"
 tox = "*"
 "e1839a8" = {path = ".", editable = true}
-"fd61203" = {path = "../flask-themes/.", editable = true}
 
 
 [requires]
