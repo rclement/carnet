@@ -1,0 +1,11 @@
+{
+    "identifier":   "default",
+    "application":  "carnet",
+    "name":         "Carnet Default Theme",
+    "description":  "This is the default theme for Carnet.",
+    "author":       "Romain Clement",
+    "website":      "http://www.github.com/rclement/carnet",
+    "license":      "MIT",
+    "preview":      "",
+    "doctype":      "html5"
+}

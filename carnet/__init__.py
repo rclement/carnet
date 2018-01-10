@@ -4,10 +4,11 @@ import string
 
 from base64 import b64encode
 from codecs import open
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Flask, redirect, request, url_for
 from flask_flatpages import FlatPages
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
+from flask_themes import setup_themes
 
 from .__about__ import (__title__, __version__, __description__, __author__,
                         __author_email__, __url__, __license__)
@@ -15,6 +16,7 @@ from .__about__ import (__title__, __version__, __description__, __author__,
 from .config import app_config
 from .utils.config import (absolute_path, check_app_config_present,
                            load_app_config)
+from .utils.render import render_template
 
 
 pages = FlatPages(name='pages')
@@ -61,6 +63,7 @@ def create_app(config_name='default', static_folder=None, template_folder=None,
     posts.init_app(app)
     bootstrap.init_app(app)
     moment.init_app(app)
+    setup_themes(app)
 
     from .views.categories import bp as categories_bp
     from .views.home import bp as home_bp

@@ -25,7 +25,7 @@ def quickstart():
     title = prompt('title', default='')
     subtitle = prompt('subtitle', default='')
     author = prompt('author', default='')
-    theme = prompt('theme', default='')
+    theme = prompt('theme', default='default')
 
     pages_path = prompt('pages_path', default='pages')
     if not pages_path:

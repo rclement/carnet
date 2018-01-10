@@ -1,7 +1,8 @@
-from flask import Blueprint, render_template
+from flask import Blueprint
 from flask_flatpages.utils import pygments_style_defs
 
 from ..utils.data import get_latest_posts, get_global_config
+from ..utils.render import render_template
 
 bp = Blueprint('home', __name__, url_prefix='')
 

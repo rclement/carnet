@@ -1,6 +1,3 @@
-import os
-
-
 class Config:
     APP_CONFIG_NAME = 'config.json'
 
@@ -8,6 +5,7 @@ class Config:
     SUBTITLE = ''
     AUTHOR = ''
     THEME = ''
+    DEFAULT_THEME = 'default'
     POSTS_PER_PAGE = 2
     TEMPLATES_AUTO_RELOAD = True
 

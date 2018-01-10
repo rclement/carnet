@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "c608627fe0df36a01ab85e22ea755fdb986e02cea5030c36b4058cc5caaec511"
+            "sha256": "2e4a29acc98cfe3b746416576f60e905a71a702b92344a6186fd136fc8e44e21"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -276,6 +276,10 @@
         "e1839a8": {
             "editable": true,
             "path": "."
+        },
+        "fd61203": {
+            "editable": true,
+            "path": "../flask-themes/."
         },
         "flake8": {
             "hashes": [

@@ -1,11 +1,11 @@
-from flask import (Blueprint, current_app, flash, redirect, render_template,
-                   url_for)
+from flask import Blueprint, current_app, flash, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, StringField
 from wtforms.validators import DataRequired
 
 from ..utils.config import (absolute_path, create_app_folders,
                             get_app_config_path, save_app_config)
+from ..utils.render import render_template
 
 
 bp = Blueprint('quickstart', __name__, url_prefix='/quickstart')
@@ -29,6 +29,7 @@ def quickstart():
             'TITLE': form.title.data,
             'SUBTITLE': form.subtitle.data,
             'AUTHOR': form.author.data,
+            'THEME': current_app.config.get('DEFAULT_THEME'),
             'FLATPAGES_PAGES_ROOT': absolute_path(form.pages_path.data),
             'FLATPAGES_POSTS_ROOT': absolute_path(form.posts_path.data),
             'FREEZER_DESTINATION': absolute_path(form.output_path.data),

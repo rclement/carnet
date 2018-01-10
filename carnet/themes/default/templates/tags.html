@@ -1,0 +1,14 @@
+{% extends theme('base.html') %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Pages tagged <em>{{ tag }}</em></h1>
+            <hr class="intro-divider">
+        </div>
+    </div>
+
+    {% include 'list.html' %}
+</div>
+{% endblock content %}

@@ -1,7 +1,8 @@
-from flask import Blueprint, render_template
+from flask import Blueprint
 
 from .. import pages
 from ..utils.data import get_global_config
+from ..utils.render import render_template
 
 
 bp = Blueprint('categories', __name__, url_prefix='/categories')

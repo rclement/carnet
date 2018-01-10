@@ -27,11 +27,16 @@ def load_app_config():
     with open(app_config_path, mode='r', encoding='utf-8') as f:
         app_config = json.load(f)
 
+    default_theme = current_app.config.get('DEFAULT_THEME')
+    app_theme = app_config.get('theme', None)
+    if not app_theme:
+        app_theme = default_theme
+
     current_app.config.update({
         'TITLE': app_config.get('title', ''),
         'SUBTITLE': app_config.get('subtitle', ''),
         'AUTHOR': app_config.get('author', ''),
-        'THEME': app_config.get('theme', ''),
+        'THEME': app_theme,
         'FLATPAGES_PAGES_ROOT': absolute_path(app_config.get('pages_path')),
         'FLATPAGES_POSTS_ROOT': absolute_path(app_config.get('posts_path')),
         'FREEZER_DESTINATION': absolute_path(app_config.get('output_path')),
@@ -39,11 +44,12 @@ def load_app_config():
 
 
 def save_app_config():
+    default_theme = current_app.config.get('DEFAULT_THEME')
     app_config = {
         'title': current_app.config.get('TITLE', ''),
         'subtitle': current_app.config.get('SUBTITLE'),
         'author': current_app.config.get('AUTHOR', ''),
-        'theme': current_app.config.get('THEME', None),
+        'theme': current_app.config.get('THEME', default_theme),
         'pages_path': current_app.config.get('FLATPAGES_PAGES_ROOT', ''),
         'posts_path': current_app.config.get('FLATPAGES_POSTS_ROOT', ''),
         'output_path': current_app.config.get('FREEZER_DESTINATION', ''),
