@@ -16,7 +16,7 @@ class TestHome(TestCase):
     def test_page_not_found(self):
         rv = self.client.get('/unknown')
         self.assert_404(rv)
-        self.assert_template_used('404.html')
+        self.assert_template_used('_themes/default/404.html')
 
     def test_pygments_css(self):
         rv = self.client.get('/pygments.css')
@@ -37,7 +37,7 @@ class TestHome(TestCase):
 
         rv = self.client.get('/')
         self.assert_200(rv)
-        self.assert_template_used('latest_posts.html')
+        self.assert_template_used('_themes/default/latest_posts.html')
         self.assert_context('posts', [])
         self.assert_context('post_page', 0)
         self.assert_context('post_page_max', 0)
@@ -48,7 +48,7 @@ class TestHome(TestCase):
 
         rv = self.client.get('/0/')
         self.assert_200(rv)
-        self.assert_template_used('latest_posts_offset.html')
+        self.assert_template_used('_themes/default/latest_posts_offset.html')
         self.assert_context('posts', [])
         self.assert_context('post_page', 0)
         self.assert_context('post_page_max', 0)

@@ -35,7 +35,7 @@ class TestHome(TestCase):
             'output_path': 'output',
         })
         self.assert_200(rv)
-        self.assert_template_used('latest_posts.html')
+        self.assert_template_used('_themes/default/latest_posts.html')
 
     def test_quickstart_invalid(self):
         rv = self.post_quickstart({
