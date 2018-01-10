@@ -97,7 +97,7 @@ def create_app(config_name='default', static_folder=None, template_folder=None,
     def page_not_found(error):
         from .utils.data import get_global_config
         return render_template(
-            '404.html', global_config=get_global_config
+            '404.html', global_config=get_global_config()
         ), 404
 
     return app

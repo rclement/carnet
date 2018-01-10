@@ -1,31 +1,9 @@
-{% extends "bootstrap/base.html" %}
-
-{% import "bootstrap/utils.html" as utils %}
-{% import "bootstrap/fixes.html" as fixes %}
-{% import "bootstrap/wtf.html" as wtf %}
-
-{% block html_attribs %} lang="en"{% endblock %}
-
-{% block title %}{% if page %}{{ page.title }} | {% endif %}Flask Static Website{% endblock %}
-
-{% block head %}
-{{ super() }}
-{{ fixes.ie8() }}
-{% endblock %}
-
-{% block styles %}
-{{ super() }}
-<link rel="stylesheet" href="{{ url_for('home.pygments_css') }}">
-{% endblock %}
-
-{% block scripts %}
-{{ super() }}
-{{ moment.include_moment() }}
-{% endblock %}
+{% extends 'base.html' %}
 
 {% block content %}
 <div class="container">
     {{ utils.flashed_messages() }}
+
     <div class="page-header">
         <h1>Quickstart configuration</h1>
     </div>

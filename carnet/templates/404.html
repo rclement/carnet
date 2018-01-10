@@ -1,7 +1,9 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block content %}
 <div class="container">
+    {{ utils.flashed_messages() }}
+
     <div class="row">
         <div class="col-md-12">
             <h1>Page not found</h1>
