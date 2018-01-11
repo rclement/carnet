@@ -1,14 +1,14 @@
 import os
 import sys
 
-from setuptools import setup
+from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
 from codecs import open
 
 
 here = os.path.abspath(os.path.dirname(__file__))
 
-packages = ['carnet']
+packages = find_packages()
 
 requires = [
     'blinker',
@@ -23,15 +23,13 @@ requires = [
     'pygments'
 ]
 
-test_requires = [
-    'coverage',
+tests_require = [
     'docutils',
-    'flake8',
-    'flask-testing',
-    'pytest',
-    'pytest-cov',
-    'sphinx',
     'tox'
+]
+
+dependency_links = [
+    'https://github.com/rclement/flask-themes.git@fix-integration-flask-0.12#egg=flask-themes'
 ]
 
 entry_points = {
@@ -73,7 +71,8 @@ setup(
     long_description=readme,
     packages=packages,
     install_requires=requires,
-    test_requires=test_requires,
+    dependency_links=dependency_links,
+    tests_require=tests_require,
     cmdclass={'test': ToxTest},
     entry_points=entry_points,
     classifiers=[

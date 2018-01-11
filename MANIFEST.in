@@ -1,0 +1,3 @@
+graft carnet/static
+graft carnet/templates
+graft carnet/themes

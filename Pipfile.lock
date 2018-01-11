@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "5879c3fc6e6510a87c01b260fc8b6c01121e9d956774d3c8dfe69d9dc02f2420"
+            "sha256": "05fd393a9192c0c8365a167f0ec5ca1895289e847de71b53c173d9a418a78241"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -81,7 +81,7 @@
         },
         "flask-themes": {
             "editable": true,
-            "path": "git+https://github.com/rclement/flask-themes.git@fix-integration-flask-0.12#egg=flask_themes"
+            "path": "git+https://github.com/rclement/flask-themes.git@fix-integration-flask-0.12#egg=flask-themes"
         },
         "flask-wtf": {
             "hashes": [
