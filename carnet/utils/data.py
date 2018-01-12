@@ -31,7 +31,10 @@ def get_all_posts():
     return sorted_posts
 
 
-def get_latest_posts(offset=0):
+def get_latest_posts(offset=None):
+    if offset is None:
+        offset = 0
+
     published_posts = [
         p for p in posts if p.meta.get('published', None) is not None
     ]

@@ -11,7 +11,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url_for('home.latest_posts') }}">{{ global_config.title }}</a>
+            <a class="navbar-brand" href="{{ url_for('home.index') }}">{{ global_config.title }}</a>
         </div>
 
         <div class="collapse navbar-collapse" id="navbar-collapse-id">
@@ -26,7 +26,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         {% for p in global_config.all_posts %}
-                        <li><a href="{{url_for('posts.post', path=p.path) }}">{{ p.title }}</a></li>
+                        <li><a href="{{ url_for('posts.post', path=p.path) }}">{{ p.title }}</a></li>
                         {% else %}
                         <li><a href="#">No posts</a></li>
                         {% endfor %}
@@ -42,7 +42,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         {% for p in global_config.all_pages %}
-                        <li><a href="{{url_for('pages.page', path=p.path) }}">{{ p.title }}</a></li>
+                        <li><a href="{{ url_for('pages.page', path=p.path) }}">{{ p.title }}</a></li>
                         {% else %}
                         <li><a href="#">No pages</a></li>
                         {% endfor %}
@@ -59,7 +59,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         {% for c in global_config.all_categories %}
-                        <li><a href="{{url_for('categories.category', category_name=c) }}">{{ c }}</a></li>
+                        <li><a href="{{ url_for('categories.category', category_name=c) }}">{{ c }}</a></li>
                         {% else %}
                         <li><a href="#">No categories</a></li>
                         {% endfor %}
@@ -75,7 +75,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         {% for t in global_config.all_tags %}
-                        <li><a href="{{url_for('tags.tag', tag_name=t) }}">{{ t }}</a></li>
+                        <li><a href="{{ url_for('tags.tag', tag_name=t) }}">{{ t }}</a></li>
                         {% else %}
                         <li><a href="#">No tags</a></li>
                         {% endfor %}

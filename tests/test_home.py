@@ -18,7 +18,7 @@ class TestHomeConfigured(TestAppConfigured):
     def test_empty_latest_posts(self):
         rv = self.client.get('/')
         self.assert_200(rv)
-        self.assert_template_used('_themes/default/latest_posts.html')
+        self.assert_template_used('_themes/default/index.html')
         self.assert_context('posts', [])
         self.assert_context('post_page', 0)
         self.assert_context('post_page_max', 0)
@@ -27,7 +27,7 @@ class TestHomeConfigured(TestAppConfigured):
     def test_empty_latest_posts_page_0(self):
         rv = self.client.get('/0/')
         self.assert_200(rv)
-        self.assert_template_used('_themes/default/latest_posts_offset.html')
+        self.assert_template_used('_themes/default/index.html')
         self.assert_context('posts', [])
         self.assert_context('post_page', 0)
         self.assert_context('post_page_max', 0)

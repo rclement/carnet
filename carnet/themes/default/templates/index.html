@@ -34,9 +34,15 @@
 
             <nav aria-label="Page navigation">
                 <ul class="pager">
-                    {% if posts|length > 0 %}
-                        <li class="previous {% if post_page == post_page_max %}disabled{% endif %}">
-                            <a href="{% if post_page < post_page_max %}{{ url_for('home.latest_posts_offset', offset=1) }}{% else %}#{% endif %}"><span aria-hidden="true">&larr;</span> Older</a>
+                    {% if post_page < post_page_max %}
+                        <li class="previous">
+                            <a href="{% if post_page < post_page_max %}{{ url_for('home.index', offset=post_page + 1) }}{% else %}#{% endif %}"><span aria-hidden="true">&larr;</span> Older</a>
+                        </li>
+                    {% endif %}
+
+                    {% if post_page > 0 %}
+                        <li class="next">
+                            <a href="{% if post_page > 0 %}{{ url_for('home.index', offset=post_page - 1) }}{% else %}#{% endif %}">Newer <span aria-hidden="true">&rarr;</span></a>
                         </li>
                     {% endif %}
                 </ul>

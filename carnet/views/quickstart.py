@@ -39,6 +39,6 @@ def quickstart():
         create_app_folders()
 
         flash('Configuration file created in \'' + get_app_config_path() + '\'')
-        return redirect(url_for('home.latest_posts'))
+        return redirect(url_for('home.index'))
 
     return render_template('quickstart.html', title='Quickstart', form=form)

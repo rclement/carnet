@@ -8,24 +8,12 @@ bp = Blueprint('home', __name__, url_prefix='')
 
 
 @bp.route('/')
-def latest_posts():
-    paged_posts, post_page, post_page_max = get_latest_posts()
-
-    return render_template(
-        'latest_posts.html',
-        global_config=get_global_config(),
-        posts=paged_posts,
-        post_page=post_page,
-        post_page_max=post_page_max
-    )
-
-
 @bp.route('/<int:offset>/')
-def latest_posts_offset(offset):
+def index(offset=None):
     paged_posts, post_page, post_page_max = get_latest_posts(offset)
 
     return render_template(
-        'latest_posts_offset.html',
+        'index.html',
         global_config=get_global_config(),
         posts=paged_posts,
         post_page=post_page,
