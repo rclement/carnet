@@ -1,11 +1,9 @@
 import unittest
 
-from flask_testing import TestCase
-
-from tests.utils import create_test_app, cleanup_folders
+from tests.utils import TestAppNotConfigured
 
 
-class TestHome(TestCase):
+class TestQuickstart(TestAppNotConfigured):
 
     def post_quickstart(self, data):
         return self.client.post(
@@ -13,12 +11,6 @@ class TestHome(TestCase):
             data=data,
             follow_redirects=True
         )
-
-    def create_app(self):
-        return create_test_app()
-
-    def tearDown(self):
-        cleanup_folders()
 
     def test_quickstart_empty(self):
         rv = self.post_quickstart({})
