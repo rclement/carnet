@@ -9,6 +9,8 @@ class Config:
     POSTS_PER_PAGE = 2
     TEMPLATES_AUTO_RELOAD = True
 
+    ASSETS_ROOT = 'assets'
+
     FLATPAGES_PAGES_ROOT = 'pages'
     FLATPAGES_PAGES_EXTENSION = '.md'
     FLATPAGES_POSTS_ROOT = 'posts'
@@ -33,7 +35,7 @@ class TestingConfig(Config):
     WTF_CSRF_ENABLED = False
 
 
-def app_config(config='default'):
+def get_app_config(config='default'):
     configs = {
         'production': ProductionConfig,
         'development': DevelopmentConfig,

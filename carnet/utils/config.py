@@ -5,8 +5,12 @@ from codecs import open
 from flask import current_app
 
 
-def absolute_path(relative_path):
-    return os.path.abspath(relative_path or '')
+def absolute_path(rel_path):
+    return os.path.abspath(rel_path or '')
+
+
+def relative_path(abs_path):
+    return os.path.relpath(abs_path or '')
 
 
 def get_app_config_path():
@@ -19,28 +23,33 @@ def check_app_config_present():
     return os.path.isfile(app_config_path)
 
 
-def load_app_config():
-    app_config_path = get_app_config_path()
-    if not check_app_config_present():
-        return {}
+def load_user_config(user_config_file):
+    app_config = {}
 
-    with open(app_config_path, mode='r', encoding='utf-8') as f:
-        app_config = json.load(f)
+    app_config_path = absolute_path(user_config_file)
+    if os.path.isfile(app_config_path):
+        with open(app_config_path, mode='r', encoding='utf-8') as f:
+            app_config = json.load(f)
 
-    default_theme = current_app.config.get('DEFAULT_THEME')
-    app_theme = app_config.get('theme', None)
-    if not app_theme:
-        app_theme = default_theme
+    return app_config
 
-    current_app.config.update({
-        'TITLE': app_config.get('title', ''),
-        'SUBTITLE': app_config.get('subtitle', ''),
-        'AUTHOR': app_config.get('author', ''),
-        'THEME': app_theme,
-        'FLATPAGES_PAGES_ROOT': absolute_path(app_config.get('pages_path')),
-        'FLATPAGES_POSTS_ROOT': absolute_path(app_config.get('posts_path')),
-        'FREEZER_DESTINATION': absolute_path(app_config.get('output_path')),
-    })
+
+def update_app_config(app_config, user_config):
+    default_theme = app_config.DEFAULT_THEME
+    user_theme = user_config.get('theme', None)
+    if not user_theme:
+        user_theme = default_theme
+
+    app_config.TITLE = user_config.get('title', '')
+    app_config.SUBTITLE = user_config.get('subtitle', '')
+    app_config.AUTHOR = user_config.get('author', '')
+    app_config.THEME = user_theme
+    app_config.ASSETS_ROOT = absolute_path(user_config.get('assets_path'))
+    app_config.FLATPAGES_PAGES_ROOT = absolute_path(user_config.get('pages_path'))
+    app_config.FLATPAGES_POSTS_ROOT = absolute_path(user_config.get('posts_path'))
+    app_config.FREEZER_DESTINATION = absolute_path(user_config.get('output_path'))
+
+    return app_config
 
 
 def save_app_config():
@@ -50,9 +59,10 @@ def save_app_config():
         'subtitle': current_app.config.get('SUBTITLE'),
         'author': current_app.config.get('AUTHOR', ''),
         'theme': current_app.config.get('THEME', default_theme),
-        'pages_path': current_app.config.get('FLATPAGES_PAGES_ROOT', ''),
-        'posts_path': current_app.config.get('FLATPAGES_POSTS_ROOT', ''),
-        'output_path': current_app.config.get('FREEZER_DESTINATION', ''),
+        'assets_path': relative_path(current_app.config.get('ASSETS_ROOT', '')),
+        'pages_path': relative_path(current_app.config.get('FLATPAGES_PAGES_ROOT', '')),
+        'posts_path': relative_path(current_app.config.get('FLATPAGES_POSTS_ROOT', '')),
+        'output_path': relative_path(current_app.config.get('FREEZER_DESTINATION', '')),
     }
 
     app_config_path = get_app_config_path()

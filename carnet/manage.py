@@ -12,7 +12,12 @@ def absolute_path(relative_path):
     return os.path.abspath(relative_path or '')
 
 
-app = create_app(instance_path='instance')
+user_instance_path = 'instance'
+user_config_file = 'config.json'
+app = create_app(
+    instance_path=user_instance_path,
+    user_config_file=user_config_file
+)
 manager = Manager(app)
 freezer = Freezer(app)
 

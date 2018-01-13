@@ -4,7 +4,7 @@ import string
 
 from base64 import b64encode
 from codecs import open
-from flask import Flask, redirect, request, url_for
+from flask import Flask, Blueprint, redirect, request, url_for
 from flask_flatpages import FlatPages
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
@@ -13,9 +13,9 @@ from flask_themes import setup_themes
 from .__about__ import (__title__, __version__, __description__, __author__,
                         __author_email__, __url__, __license__)
 
-from .config import app_config
+from .config import get_app_config
 from .utils.config import (absolute_path, check_app_config_present,
-                           load_app_config)
+                           load_user_config, update_app_config)
 from .utils.render import render_template
 
 
@@ -41,22 +41,21 @@ def create_instance_config(instance_config_file):
             f.write(instance_config_text)
 
 
-def create_app(config_name='default', static_folder=None, template_folder=None,
-               instance_path=None):
+def create_app(config_name='default', user_config_file=None, instance_path=None):
     app_kwargs = {}
-
-    if static_folder:
-        app_kwargs['static_folder'] = absolute_path(static_folder)
-    if template_folder:
-        app_kwargs['template_folder'] = absolute_path(template_folder)
     if instance_path:
         app_kwargs['instance_path'] = absolute_path(instance_path)
 
     app = Flask(import_name=__name__, **app_kwargs)
 
+    app_config = get_app_config(config_name)
+    if user_config_file is not None:
+        user_config = load_user_config(user_config_file)
+        app_config = update_app_config(app_config, user_config)
+    app.config.from_object(app_config)
+
     instance_config_file = os.path.join(app.instance_path, 'config.py')
     create_instance_config(instance_config_file)
-    app.config.from_object(app_config(config_name))
     app.config.from_pyfile(instance_config_file)
 
     pages.init_app(app)
@@ -64,6 +63,13 @@ def create_app(config_name='default', static_folder=None, template_folder=None,
     bootstrap.init_app(app)
     moment.init_app(app)
     setup_themes(app)
+
+    assets_bp = Blueprint(
+        'assets',
+        __name__,
+        static_folder=absolute_path(app_config.ASSETS_ROOT)
+    )
+    app.register_blueprint(assets_bp)
 
     from .views.categories import bp as categories_bp
     from .views.home import bp as home_bp
@@ -77,9 +83,6 @@ def create_app(config_name='default', static_folder=None, template_folder=None,
     app.register_blueprint(posts_bp)
     app.register_blueprint(quickstart_bp)
     app.register_blueprint(tags_bp)
-
-    with app.app_context():
-        load_app_config()
 
     @app.before_request
     def redirect_to_quickstart():

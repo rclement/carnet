@@ -15,6 +15,8 @@ class QuickstartForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     subtitle = StringField('Subtitle')
     author = StringField('Author', validators=[DataRequired()])
+    theme = StringField('Theme', default='default', validators=[DataRequired()])
+    assets_path = StringField('Assets path', default='assets', validators=[DataRequired()])
     pages_path = StringField('Pages path', default='pages', validators=[DataRequired()])
     posts_path = StringField('Posts path', default='posts', validators=[DataRequired()])
     output_path = StringField('Output path', default='output', validators=[DataRequired()])
@@ -29,7 +31,8 @@ def quickstart():
             'TITLE': form.title.data,
             'SUBTITLE': form.subtitle.data,
             'AUTHOR': form.author.data,
-            'THEME': current_app.config.get('DEFAULT_THEME'),
+            'THEME': form.theme.data,
+            'ASSETS_ROOT': absolute_path(form.assets_path.data),
             'FLATPAGES_PAGES_ROOT': absolute_path(form.pages_path.data),
             'FLATPAGES_POSTS_ROOT': absolute_path(form.posts_path.data),
             'FREEZER_DESTINATION': absolute_path(form.output_path.data),

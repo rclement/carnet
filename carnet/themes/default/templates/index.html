@@ -12,7 +12,7 @@
                 {% if p.meta.get('header-image') %}
                     <img class="img-responsive"
                          alt="Post header image"
-                         src="{{ url_for('static', filename=p.meta.get('header-image')) }}" />
+                         src="{{ url_for('assets.static', filename=p.meta.get('header-image')) }}" />
                 {% endif %}
 
                 <h1><a href="{{ url_for('posts.post', path=p.path) }}">{{ p.title }}</a></h1>
