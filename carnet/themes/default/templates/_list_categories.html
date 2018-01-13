@@ -1,0 +1,10 @@
+{% for c in categories %}
+    <ul>
+        <li>
+            <a href="{{ url_for('categories.category', category_name=c) }}">{{ c }}</a>
+        </li>
+    </ul>
+{% else %}
+    <h3>No categories</h3>
+    <hr class="intro-divider">
+{% endfor %}

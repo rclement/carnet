@@ -1,7 +1,6 @@
 import unittest
 
-from tests.utils import (TestAppConfigured, TestAppNotConfigured,
-                         create_app_config)
+from tests.utils import (TestAppConfigured, TestAppNotConfigured)
 
 
 class TestHomeConfigured(TestAppConfigured):

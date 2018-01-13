@@ -1,5 +1,3 @@
-import math
-
 from flask import current_app
 
 from .. import pages, posts
@@ -18,6 +16,16 @@ def get_all_pages():
 
 def get_page(path):
     return pages.get_or_404(path)
+
+
+def get_tagged_pages(tag):
+    all_pages = get_all_pages()
+    return [p for p in all_pages if tag in p.meta.get('tags', [])]
+
+
+def get_categorized_pages(category):
+    all_pages = get_all_pages()
+    return [p for p in all_pages if category in p.meta.get('categories', [])]
 
 
 def get_all_posts():
@@ -56,6 +64,16 @@ def get_latest_posts(offset=None):
 
 def get_post(path):
     return posts.get_or_404(path)
+
+
+def get_tagged_posts(tag):
+    all_posts = get_all_posts()
+    return [p for p in all_posts if tag in p.meta.get('tags', [])]
+
+
+def get_categorized_posts(category):
+    all_posts = get_all_posts()
+    return [p for p in all_posts if category in p.meta.get('categories', [])]
 
 
 def get_all_categories():

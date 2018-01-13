@@ -1,0 +1,10 @@
+{% for t in tags %}
+    <ul>
+        <li>
+            <a href="{{ url_for('tags.tag', tag_name=t) }}">{{ t }}</a>
+        </li>
+    </ul>
+{% else %}
+    <h3>No tags</h3>
+    <hr class="intro-divider">
+{% endfor %}
