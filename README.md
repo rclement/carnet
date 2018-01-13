@@ -91,6 +91,7 @@ The result will be stored in the specified output folder.
 - `flask-flatpages`
 - `flask-moment`
 - `flask-script`
+- `flask-themes`
 - `flask-wtf`
 - `frozen-flask`
 - `pygments`
