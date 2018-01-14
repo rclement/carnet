@@ -1,10 +1,12 @@
 from flask import Blueprint, current_app, flash, redirect, url_for
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, StringField
+from wtforms import SelectField, StringField, SubmitField
 from wtforms.validators import DataRequired
 
-from ..utils.config import (absolute_path, create_app_folders,
-                            get_app_config_path, save_app_config)
+from flask_themes import get_themes_list
+
+from ..utils.config import (create_app_folders, get_app_config_path,
+                            save_app_config)
 from ..utils.render import render_template
 
 
@@ -15,27 +17,21 @@ class QuickstartForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     subtitle = StringField('Subtitle')
     author = StringField('Author', validators=[DataRequired()])
-    theme = StringField('Theme', default='default', validators=[DataRequired()])
-    assets_path = StringField('Assets path', default='assets', validators=[DataRequired()])
-    pages_path = StringField('Pages path', default='pages', validators=[DataRequired()])
-    posts_path = StringField('Posts path', default='posts', validators=[DataRequired()])
-    output_path = StringField('Output path', default='output', validators=[DataRequired()])
+    theme = SelectField('Theme', default='default')
     go = SubmitField('Go')
 
 
 @bp.route('/', methods=['GET', 'POST'])
 def quickstart():
     form = QuickstartForm()
+    form.theme.choices = [(t.identifier, t.name) for t in get_themes_list()]
+
     if form.validate_on_submit():
         current_app.config.update({
             'TITLE': form.title.data,
             'SUBTITLE': form.subtitle.data,
             'AUTHOR': form.author.data,
             'THEME': form.theme.data,
-            'ASSETS_ROOT': absolute_path(form.assets_path.data),
-            'FLATPAGES_PAGES_ROOT': absolute_path(form.pages_path.data),
-            'FLATPAGES_POSTS_ROOT': absolute_path(form.posts_path.data),
-            'FREEZER_DESTINATION': absolute_path(form.output_path.data),
         })
 
         save_app_config()

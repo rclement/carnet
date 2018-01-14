@@ -1,6 +1,12 @@
+import os
+
+from .utils.config import absolute_path
+
+
 class Config:
     APP_CONFIG_NAME = 'config.json'
 
+    # user config
     TITLE = ''
     SUBTITLE = ''
     AUTHOR = ''
@@ -9,14 +15,15 @@ class Config:
     POSTS_PER_PAGE = 2
     TEMPLATES_AUTO_RELOAD = True
 
-    ASSETS_ROOT = 'assets'
+    CONTENT_PATH = 'content'
+    ASSETS_ROOT = absolute_path(os.path.join(CONTENT_PATH, 'assets'))
 
-    FLATPAGES_PAGES_ROOT = 'pages'
+    FLATPAGES_PAGES_ROOT = absolute_path(os.path.join(CONTENT_PATH, 'pages'))
     FLATPAGES_PAGES_EXTENSION = '.md'
-    FLATPAGES_POSTS_ROOT = 'posts'
+    FLATPAGES_POSTS_ROOT = absolute_path(os.path.join(CONTENT_PATH, 'posts'))
     FLATPAGES_POSTS_EXTENSION = '.md'
 
-    FREEZER_DESTINATION = 'build'
+    FREEZER_DESTINATION = absolute_path('output')
 
 
 class ProductionConfig(Config):

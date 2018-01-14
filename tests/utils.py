@@ -9,6 +9,14 @@ from carnet.utils.config import absolute_path
 
 
 test_user_config_file = 'config.json'
+test_user_folders = [
+    'instance',
+    'content',
+    'content/assets',
+    'content/posts',
+    'content/pages',
+    'content/output'
+]
 
 
 def test_user_config():
@@ -17,10 +25,6 @@ def test_user_config():
         'subtitle': 'My subtitle',
         'author': 'Me, Myself and I',
         'theme': 'default',
-        'assets_path': 'assets',
-        'pages_path': 'pages',
-        'posts_path': 'posts',
-        'output_path': 'output',
     }
 
 
@@ -38,46 +42,30 @@ def delete_user_config():
         os.remove(user_config_path)
 
 
-def create_folders(user_config):
+def create_user_folders():
     def _create_folder(path):
         folder = absolute_path(path)
         if path and not os.path.isdir(folder):
-            os.mkdir(folder)
+            os.makedirs(folder)
 
-    folders = [
-        'instance',
-        user_config.get('assets_path', None),
-        user_config.get('posts_path', None),
-        user_config.get('pages_path', None),
-        user_config.get('output_path', None)
-    ]
-
-    for f in folders:
+    for f in test_user_folders:
         _create_folder(f)
 
 
-def delete_folders(user_config):
+def delete_user_folders():
     def _delete_folder(path):
         folder = absolute_path(path)
         if path and os.path.isdir(folder):
             shutil.rmtree(folder)
 
-    folders = [
-        'instance',
-        user_config.get('assets_path', None),
-        user_config.get('posts_path', None),
-        user_config.get('pages_path', None),
-        user_config.get('output_path', None)
-    ]
-
-    for f in folders:
+    for f in test_user_folders:
         _delete_folder(f)
 
 
-def create_test_app():
+def create_test_app(user_config_file=None):
     return create_app(
         config_name='testing',
-        user_config_file=test_user_config_file,
+        user_config_file=user_config_file,
         instance_path='instance'
     )
 
@@ -86,11 +74,11 @@ class TestAppConfigured(TestCase):
 
     def create_app(self):
         self.user_config = create_user_config()
-        create_folders(self.user_config)
-        return create_test_app()
+        create_user_folders()
+        return create_test_app(test_user_config_file)
 
     def tearDown(self):
-        delete_folders(self.user_config)
+        delete_user_folders()
         delete_user_config()
 
 
@@ -98,3 +86,6 @@ class TestAppNotConfigured(TestCase):
 
     def create_app(self):
         return create_test_app()
+
+    def tearDown(self):
+        delete_user_folders()

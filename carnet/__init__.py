@@ -14,6 +14,7 @@ from .__about__ import (__title__, __version__, __description__, __author__,
                         __author_email__, __url__, __license__)
 
 from .config import get_app_config
+from .utils.assets import create_assets_blueprint
 from .utils.config import (absolute_path, check_app_config_present,
                            load_user_config, update_app_config)
 from .utils.render import render_template
@@ -64,11 +65,7 @@ def create_app(config_name='default', user_config_file=None, instance_path=None)
     moment.init_app(app)
     setup_themes(app)
 
-    assets_bp = Blueprint(
-        'assets',
-        __name__,
-        static_folder=absolute_path(app_config.ASSETS_ROOT)
-    )
+    assets_bp = create_assets_blueprint(app_config.ASSETS_ROOT)
     app.register_blueprint(assets_bp)
 
     from .views.categories import bp as categories_bp
