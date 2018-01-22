@@ -25,24 +25,68 @@ pages = FlatPages(name='pages')
 posts = FlatPages(name='posts')
 bootstrap = Bootstrap()
 moment = Moment()
-freezer = Freezer()
+freezer = Freezer(with_no_argument_rules=False, log_url_for=True)
 
 
 # ------------------------------------------------------------------------------
 
 
 @freezer.register_generator
-def page_url_generator():
-    return [
-        ('pages.page', {'path': p.path}) for p in pages
+def home_url_generator():
+    urls = [
+        ('home.index', {})
     ]
+    return urls
+
+
+@freezer.register_generator
+def pages_url_generator():
+    urls = [
+        ('pages.pages', {})
+    ]
+    urls.extend([
+        ('pages.page', {'path': p.path}) for p in pages
+    ])
+    return urls
 
 
 @freezer.register_generator
 def post_url_generator():
-    return [
-        ('posts.post', {'path': p.path}) for p in posts
+    urls = [
+        ('posts.posts', {})
     ]
+    urls.extend([
+        ('posts.post', {'path': p.path}) for p in posts
+    ])
+    return urls
+
+
+@freezer.register_generator
+def categories_url_generator():
+    from .utils.data import get_all_categories
+    all_categories = get_all_categories()
+
+    urls = [
+        ('categories.categories', {})
+    ]
+    urls.extend([
+        ('categories.category', {'category_name': c}) for c in all_categories
+    ])
+    return urls
+
+
+@freezer.register_generator
+def tags_url_generator():
+    from .utils.data import get_all_tags
+    all_tags = get_all_tags()
+
+    urls = [
+        ('tags.tags', {})
+    ]
+    urls.extend([
+        ('tags.tag', {'tag_name': t}) for t in all_tags
+    ])
+    return urls
 
 
 # ------------------------------------------------------------------------------
