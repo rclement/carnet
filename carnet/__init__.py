@@ -4,11 +4,12 @@ import string
 
 from base64 import b64encode
 from codecs import open
-from flask import Flask, Blueprint, redirect, request, url_for
+from flask import Flask, redirect, request, url_for
 from flask_flatpages import FlatPages
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from flask_themes import setup_themes
+from flask_frozen import Freezer
 
 from .__about__ import (__title__, __version__, __description__, __author__,
                         __author_email__, __url__, __license__)
@@ -24,6 +25,27 @@ pages = FlatPages(name='pages')
 posts = FlatPages(name='posts')
 bootstrap = Bootstrap()
 moment = Moment()
+freezer = Freezer()
+
+
+# ------------------------------------------------------------------------------
+
+
+@freezer.register_generator
+def page_url_generator():
+    return [
+        ('pages.page', {'path': p.path}) for p in pages
+    ]
+
+
+@freezer.register_generator
+def post_url_generator():
+    return [
+        ('posts.post', {'path': p.path}) for p in posts
+    ]
+
+
+# ------------------------------------------------------------------------------
 
 
 def create_instance_config(instance_config_file):
@@ -64,6 +86,7 @@ def create_app(config_name='default', user_config_file=None, instance_path=None)
     bootstrap.init_app(app)
     moment.init_app(app)
     setup_themes(app)
+    freezer.init_app(app)
 
     assets_bp = create_assets_blueprint(app_config.ASSETS_ROOT)
     app.register_blueprint(assets_bp)
