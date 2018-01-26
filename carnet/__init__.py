@@ -146,7 +146,6 @@ def create_app(config_name='default', user_config_file=None, instance_path=None)
     app.register_blueprint(tags_bp)
 
     app_theme = app.theme_manager.themes.get(app.config.get('THEME'), None)
-    print(app_theme.info.get('spa', False))
     register_freezer_generators(app_theme.info.get('spa', False))
 
     @app.before_request
