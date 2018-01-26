@@ -1,20 +1,42 @@
 {% extends '_base.html' %}
 
+{% import '_utils.html' as utils %}
+
 {% block content %}
 <div class="container">
-    {{ utils.flashed_messages() }}
-
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
+            {{ utils.flashed_messages() }}
+
             <div class="page-header">
                 <h1>Carnet Quickstart</h1>
             </div>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            {{ wtf.quick_form(form) }}
+            <form>
+                {{ form.hidden_tag() }}
+
+                <div class="form-group">
+                    {{ form.title.label(class="control-label") }}
+                    {{ form.title(class="form-control") }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.subtitle.label(class="control-label") }}
+                    {{ form.subtitle(class="form-control") }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.author.label(class="control-label") }}
+                    {{ form.author(class="form-control") }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.theme.label(class="control-label") }}
+                    {{ form.theme(class="form-control") }}
+                </div>
+
+                {{ form.go(class="btn btn-default") }}
+            </form>
         </div>
     </div>
 </div>

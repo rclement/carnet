@@ -1,8 +1,4 @@
-{% extends 'bootstrap/base.html' %}
-
-{% import 'bootstrap/utils.html' as utils %}
-{% import 'bootstrap/fixes.html' as fixes %}
-{% import 'bootstrap/wtf.html' as wtf %}
+{% extends '_skeleton.html' %}
 
 {% block html_attribs %} lang="en"{% endblock %}
 
@@ -10,16 +6,37 @@
 
 {% block head %}
 {{ super() }}
-{{ fixes.ie8() }}
+<!-- IE fixes-->
+<!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+{% endblock %}
+
+{% block metas %}
+{{ super() }}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 {% endblock %}
 
 {% block styles %}
 {{ super() }}
-<link rel="stylesheet" href="{{ url_for('home.pygments_css') }}">
+<!-- Bootstrap -->
+<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"
+      type="text/css"
+      rel="stylesheet">
+
+<!-- Font-Awesome -->
+<link rel="stylesheet"
+      type="text/css"
+      href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css">
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('home.pygments_css') }}">
 {% endblock %}
 
 {% block scripts %}
 {{ super() }}
+<script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://unpkg.com/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
 {{ moment.include_moment() }}
 {% endblock %}
 

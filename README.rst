@@ -101,8 +101,8 @@ Dependencies
 
 ``carnet`` makes use of the following open-source projects:
 
+-  ``blinker``
 -  ``flask``
--  ``flask-bootstrap``
 -  ``flask-flatpages``
 -  ``flask-moment``
 -  ``flask-script``

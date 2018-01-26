@@ -6,7 +6,6 @@ from base64 import b64encode
 from codecs import open
 from flask import Flask, redirect, request, url_for
 from flask_flatpages import FlatPages
-from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from flask_themes import setup_themes
 from flask_frozen import Freezer
@@ -23,7 +22,6 @@ from .utils.render import render_template
 
 pages = FlatPages(name='pages')
 posts = FlatPages(name='posts')
-bootstrap = Bootstrap()
 moment = Moment()
 freezer = Freezer(with_no_argument_rules=False, log_url_for=True)
 
@@ -124,7 +122,6 @@ def create_app(config_name='default', user_config_file=None, instance_path=None)
 
     pages.init_app(app)
     posts.init_app(app)
-    bootstrap.init_app(app)
     moment.init_app(app)
     setup_themes(app)
     freezer.init_app(app)
