@@ -40,4 +40,9 @@ def quickstart():
         flash('Configuration file created in \'' + get_app_config_path() + '\'')
         return redirect(url_for('home.index'))
 
+    form.title.data = current_app.config.get('TITLE')
+    form.subtitle.data = current_app.config.get('SUBTITLE')
+    form.author.data = current_app.config.get('AUTHOR')
+    form.title.data = current_app.config.get('TITLE')
+    form.theme.data = current_app.config.get('THEME')
     return render_template('quickstart.html', title='Quickstart', form=form)

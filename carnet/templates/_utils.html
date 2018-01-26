@@ -18,3 +18,10 @@
         {% endif %}
     {% endwith %}
 {% endmacro %}
+
+{% macro render_form_field(field) %}
+    <div class="form-group {% if field.errors %}has-error{% endif %}">
+        {{ field.label(class="control-label") }}
+        {{ field(class="form-control") }}
+    </div>
+{% endmacro %}

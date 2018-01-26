@@ -12,29 +12,12 @@
                 <h1>Carnet Quickstart</h1>
             </div>
 
-            <form>
+            <form action="" method="post">
                 {{ form.hidden_tag() }}
-
-                <div class="form-group">
-                    {{ form.title.label(class="control-label") }}
-                    {{ form.title(class="form-control") }}
-                </div>
-
-                <div class="form-group">
-                    {{ form.subtitle.label(class="control-label") }}
-                    {{ form.subtitle(class="form-control") }}
-                </div>
-
-                <div class="form-group">
-                    {{ form.author.label(class="control-label") }}
-                    {{ form.author(class="form-control") }}
-                </div>
-
-                <div class="form-group">
-                    {{ form.theme.label(class="control-label") }}
-                    {{ form.theme(class="form-control") }}
-                </div>
-
+                {{ utils.render_form_field(form.title) }}
+                {{ utils.render_form_field(form.subtitle) }}
+                {{ utils.render_form_field(form.author) }}
+                {{ utils.render_form_field(form.theme) }}
                 {{ form.go(class="btn btn-default") }}
             </form>
         </div>
