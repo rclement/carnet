@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "05fd393a9192c0c8365a167f0ec5ca1895289e847de71b53c173d9a418a78241"
+            "sha256": "36eb9612f0fbefdedd55583dc10150c131ae51a51ba108922c876310e7e53d7f"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -81,7 +81,7 @@
         },
         "flask-themes": {
             "editable": true,
-            "path": "git+https://github.com/rclement/flask-themes.git@fix-integration-flask-0.12#egg=flask-themes"
+            "path": "git+https://github.com/rclement/flask-themes.git#egg=flask-themes"
         },
         "flask-wtf": {
             "hashes": [
@@ -193,10 +193,10 @@
         },
         "babel": {
             "hashes": [
-                "sha256:f20b2acd44f587988ff185d8949c3e208b4b3d5d20fcab7d91fe481ffa435528",
-                "sha256:6007daf714d0cd5524bbe436e2d42b3c20e68da66289559341e48d2cd6d25811"
+                "sha256:ad209a68d7162c4cff4b29cdebe3dec4cef75492df501b0049a9433c96ce6f80",
+                "sha256:8ce4cb6fdd4393edd323227cba3a077bceb2a6ce5201c902c65e730046f41f14"
             ],
-            "version": "==2.5.1"
+            "version": "==2.5.3"
         },
         "blinker": {
             "hashes": [
@@ -206,10 +206,10 @@
         },
         "certifi": {
             "hashes": [
-                "sha256:244be0d93b71e93fc0a0a479862051414d0e00e16435707e5bf5000f92e04694",
-                "sha256:5ec74291ca1136b40f0379e1128ff80e866597e4e2c1e755739a913bbc3613c0"
+                "sha256:14131608ad2fd56836d33a71ee60fa1c82bc9d2c8d98b7bdbc631fe1b3cd1296",
+                "sha256:edbc3f203427eef571f79a7692bb160a2b0f7ccaa31953e99bd17e307cf63f7d"
             ],
-            "version": "==2017.11.5"
+            "version": "==2018.1.18"
         },
         "chardet": {
             "hashes": [
