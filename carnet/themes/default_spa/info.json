@@ -1,12 +1,12 @@
 {
-    "identifier":   "default",
+    "identifier":   "default_spa",
     "application":  "carnet",
-    "name":         "Carnet Default Theme",
-    "description":  "This is the default theme for Carnet.",
+    "name":         "Carnet Default SPA Theme",
+    "description":  "This is the default single-page application theme for Carnet.",
     "author":       "Romain Clement",
     "website":      "http://www.github.com/rclement/carnet",
     "license":      "MIT",
     "preview":      "",
     "doctype":      "html5",
-    "spa":          false
+    "spa":          true
 }

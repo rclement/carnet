@@ -30,63 +30,60 @@ freezer = Freezer(with_no_argument_rules=False, log_url_for=True)
 
 # ------------------------------------------------------------------------------
 
+def register_freezer_generators(spa_theme):
+    @freezer.register_generator
+    def home_url_generator():
+        urls = [
+            ('home.index', {})
+        ]
+        return urls
 
-@freezer.register_generator
-def home_url_generator():
-    urls = [
-        ('home.index', {})
-    ]
-    return urls
+    if not spa_theme:
+        @freezer.register_generator
+        def pages_url_generator():
+            urls = [
+                ('pages.pages', {})
+            ]
+            urls.extend([
+                ('pages.page', {'path': p.path}) for p in pages
+            ])
+            return urls
 
+        @freezer.register_generator
+        def post_url_generator():
+            urls = [
+                ('posts.posts', {})
+            ]
+            urls.extend([
+                ('posts.post', {'path': p.path}) for p in posts
+            ])
+            return urls
 
-@freezer.register_generator
-def pages_url_generator():
-    urls = [
-        ('pages.pages', {})
-    ]
-    urls.extend([
-        ('pages.page', {'path': p.path}) for p in pages
-    ])
-    return urls
+        @freezer.register_generator
+        def categories_url_generator():
+            from .utils.data import get_all_categories
+            all_categories = get_all_categories()
 
+            urls = [
+                ('categories.categories', {})
+            ]
+            urls.extend([
+                ('categories.category', {'category_name': c}) for c in all_categories
+            ])
+            return urls
 
-@freezer.register_generator
-def post_url_generator():
-    urls = [
-        ('posts.posts', {})
-    ]
-    urls.extend([
-        ('posts.post', {'path': p.path}) for p in posts
-    ])
-    return urls
+        @freezer.register_generator
+        def tags_url_generator():
+            from .utils.data import get_all_tags
+            all_tags = get_all_tags()
 
-
-@freezer.register_generator
-def categories_url_generator():
-    from .utils.data import get_all_categories
-    all_categories = get_all_categories()
-
-    urls = [
-        ('categories.categories', {})
-    ]
-    urls.extend([
-        ('categories.category', {'category_name': c}) for c in all_categories
-    ])
-    return urls
-
-
-@freezer.register_generator
-def tags_url_generator():
-    from .utils.data import get_all_tags
-    all_tags = get_all_tags()
-
-    urls = [
-        ('tags.tags', {})
-    ]
-    urls.extend([
-        ('tags.tag', {'tag_name': t}) for t in all_tags
-    ])
-    return urls
+            urls = [
+                ('tags.tags', {})
+            ]
+            urls.extend([
+                ('tags.tag', {'tag_name': t}) for t in all_tags
+            ])
+            return urls
 
 
 # ------------------------------------------------------------------------------
@@ -147,6 +144,10 @@ def create_app(config_name='default', user_config_file=None, instance_path=None)
     app.register_blueprint(posts_bp)
     app.register_blueprint(quickstart_bp)
     app.register_blueprint(tags_bp)
+
+    app_theme = app.theme_manager.themes.get(app.config.get('THEME'), None)
+    print(app_theme.info.get('spa', False))
+    register_freezer_generators(app_theme.info.get('spa', False))
 
     @app.before_request
     def redirect_to_quickstart():

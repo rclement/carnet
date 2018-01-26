@@ -108,6 +108,7 @@ def get_all_tags():
 
 def get_global_config():
     return {
+        'debug': current_app.config.get('DEBUG', False),
         'title': current_app.config.get('TITLE'),
         'subtitle': current_app.config.get('SUBTITLE'),
         'author': current_app.config.get('AUTHOR'),
