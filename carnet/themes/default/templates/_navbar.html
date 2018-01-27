@@ -59,7 +59,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         {% for c in global_config.all_categories %}
-                        <li><a href="{{ url_for('categories.category', category_name=c) }}">{{ c }}</a></li>
+                        <li><a href="{{ url_for('categories.category', category_name=c.name) }}">{{ c.name }}</a></li>
                         {% else %}
                         <li><a href="#">No categories</a></li>
                         {% endfor %}
@@ -75,7 +75,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         {% for t in global_config.all_tags %}
-                        <li><a href="{{ url_for('tags.tag', tag_name=t) }}">{{ t }}</a></li>
+                        <li><a href="{{ url_for('tags.tag', tag_name=t.name) }}">{{ t.name }}</a></li>
                         {% else %}
                         <li><a href="#">No tags</a></li>
                         {% endfor %}

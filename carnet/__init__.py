@@ -66,7 +66,7 @@ def register_freezer_generators(spa_theme):
                 ('categories.categories', {})
             ]
             urls.extend([
-                ('categories.category', {'category_name': c}) for c in all_categories
+                ('categories.category', {'category_name': c['name']}) for c in all_categories
             ])
             return urls
 
@@ -79,7 +79,7 @@ def register_freezer_generators(spa_theme):
                 ('tags.tags', {})
             ]
             urls.extend([
-                ('tags.tag', {'tag_name': t}) for t in all_tags
+                ('tags.tag', {'tag_name': t['name']}) for t in all_tags
             ])
             return urls
 

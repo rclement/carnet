@@ -57,6 +57,57 @@
             {% endfor %}
             }
 
+            var _all_pages = {
+            {% for p in global_config.all_pages %}
+                '{{ p.path }}': {
+                    path: '{{ p.path }}',
+                    title: '{{ p.title }}',
+                    author: '{{ p.meta.author }}',
+                    published: moment('{{ p.meta.published }}').format('MMMM Do YYYY, h:mm:ss a'),
+                    categories: [{% for c in p.meta.categories %}'{{ c }}',{% endfor %}],
+                    tags: [{% for t in p.meta.tags %}'{{ t }}',{% endfor %}],
+                    header_image: {% if p.meta.get('header-image') %}'{{ url_for('assets.static', filename=p.meta.get('header-image')) }}'{% else %}null{% endif %},
+                    html: `{{ p.html|safe }}`,
+                },
+            {% endfor %}
+            }
+
+            var _all_categories = {
+            {% for c in global_config.all_categories %}
+                '{{ c.name }}': {
+                    name: '{{ c.name }}',
+                    posts: [
+                    {% for p in c.posts %}
+                        _all_posts['{{ p.path }}'],
+                    {% endfor %}
+                    ],
+                    pages: [
+                    {% for p in c.pages %}
+                        _all_pages['{{ p.path }}'],
+                    {% endfor %}
+                    ]
+                },
+            {% endfor %}
+            }
+
+            var _all_tags = {
+            {% for t in global_config.all_tags %}
+                '{{ t.name }}': {
+                    name: '{{ t.name }}',
+                    posts: [
+                    {% for p in t.posts %}
+                        _all_posts['{{ p.path }}'],
+                    {% endfor %}
+                    ],
+                    pages: [
+                    {% for p in t.pages %}
+                        _all_pages['{{ p.path }}'],
+                    {% endfor %}
+                    ]
+                },
+            {% endfor %}
+            }
+
             var global_config = {
                 title: '{{ global_config.title }}',
                 subtitle: '{{ global_config.subtitle }}',
@@ -64,7 +115,22 @@
                     {% for p in global_config.all_posts %}
                     _all_posts['{{ p.path }}'],
                     {% endfor %}
-                ]
+                ],
+                all_pages: [
+                    {% for p in global_config.all_pages %}
+                    _all_pages['{{ p.path }}'],
+                    {% endfor %}
+                ],
+                all_categories: [
+                    {% for c in global_config.all_categories %}
+                    _all_categories['{{ c.name }}'],
+                    {% endfor %}
+                ],
+                all_tags: [
+                    {% for t in global_config.all_tags %}
+                    _all_tags['{{ t.name }}'],
+                    {% endfor %}
+                ],
             }
         </script>
         <script src="{{ theme_static('js/app.js') }}"></script>

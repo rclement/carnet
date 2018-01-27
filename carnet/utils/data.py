@@ -82,13 +82,20 @@ def get_all_categories():
             cats = i.meta.get('categories', None)
             if cats:
                 for c in cats:
-                    if c not in all_categories:
-                        all_categories.append(c)
+                    category = {
+                        'name': c,
+                        'pages': get_categorized_pages(c),
+                        'posts': get_categorized_posts(c),
+                    }
+                    if category not in all_categories:
+                        all_categories.append(category)
 
     all_categories = []
     fill_categories(pages)
     fill_categories(posts)
-    return sorted(all_categories)
+    return sorted(
+        all_categories, key=lambda c: c['name']
+    )
 
 
 def get_all_tags():
@@ -97,13 +104,20 @@ def get_all_tags():
             tags = i.meta.get('tags', None)
             if tags:
                 for t in tags:
-                    if t not in all_tags:
-                        all_tags.append(t)
+                    tag = {
+                        'name': t,
+                        'pages': get_tagged_pages(t),
+                        'posts': get_tagged_posts(t),
+                    }
+                    if tag not in all_tags:
+                        all_tags.append(tag)
 
     all_tags = []
     fill_tags(pages)
     fill_tags(posts)
-    return sorted(all_tags)
+    return sorted(
+        all_tags, key=lambda t: t['name']
+    )
 
 
 def get_global_config():

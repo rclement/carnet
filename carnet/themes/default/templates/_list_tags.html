@@ -1,7 +1,7 @@
 {% for t in tags %}
     <ul>
         <li>
-            <a href="{{ url_for('tags.tag', tag_name=t) }}">{{ t }}</a>
+            <a href="{{ url_for('tags.tag', tag_name=t.name) }}">{{ t.name }}</a>
         </li>
     </ul>
 {% else %}
