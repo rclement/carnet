@@ -111,6 +111,7 @@
             var global_config = {
                 title: '{{ global_config.title }}',
                 subtitle: '{{ global_config.subtitle }}',
+                posts_per_page: {{ global_config.posts_per_page }},
                 all_posts: [
                     {% for p in global_config.all_posts %}
                     _all_posts['{{ p.path }}'],

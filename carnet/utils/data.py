@@ -126,6 +126,7 @@ def get_global_config():
         'title': current_app.config.get('TITLE'),
         'subtitle': current_app.config.get('SUBTITLE'),
         'author': current_app.config.get('AUTHOR'),
+        'posts_per_page': current_app.config.get('POSTS_PER_PAGE', 10),
         'all_pages': get_all_pages(),
         'all_posts': get_all_posts(),
         'all_categories': get_all_categories(),

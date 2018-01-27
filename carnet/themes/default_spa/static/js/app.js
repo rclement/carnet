@@ -395,8 +395,8 @@ const Home = {
                 <h1>{{ config.title }} <small>{{ config.subtitle }}</small></h1>
             </div>
 
-            <div v-if="config.all_posts.length > 0"
-                 v-for="p in config.all_posts">
+            <div v-if="pagedPosts.length > 0"
+                 v-for="p in pagedPosts">
                 <img v-if="p.header_image"
                      class="img-responsive"
                      alt="Post header image"
@@ -420,12 +420,58 @@ const Home = {
                 <h2>No posts</h2>
                 <hr class="intro-divider">
             </div>
-    </div>
+
+            <nav aria-label="Page navigation">
+                <ul class="pager">
+                    <li v-if="postPage < postPageMax" class="previous">
+                        <router-link key="previous" :to="{ name: 'Home', query: { page: this.postPage + 1 } }"><span aria-hidden="true">&larr;</span> Older</router-link>
+                    </li>
+
+                    <li v-if="postPage > 0" class="next">
+                        <router-link key="next" :to="{ name: 'Home', query: { page: this.postPage - 1 } }">Newer <span aria-hidden="true">&rarr;</span></router-link>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     `,
 
     data: function() {
         return {
             config: global_config
+        }
+    },
+
+    props: {
+        page: {
+            default: '0'
+        }
+    },
+
+    computed: {
+        pageOffset: function() {
+            return Math.floor(this.page)
+        },
+
+        numPosts: function() {
+            return this.config.all_posts.length
+        },
+
+        postsPerPage: function() {
+            return this.config.posts_per_page
+        },
+
+        postPageMax: function() {
+            return Math.floor(this.numPosts / this.postsPerPage)
+        },
+
+        postPage: function () {
+            return Math.max(Math.min(this.pageOffset, this.postPageMax), 0)
+        },
+
+        pagedPosts: function() {
+            var start = Math.min(this.numPosts, this.postsPerPage * this.postPage)
+            var end = Math.min(this.numPosts, start + this.postsPerPage)
+            return this.config.all_posts.slice(start, end)
         }
     }
 }
@@ -455,7 +501,7 @@ const App = {
 /* -------------------------------------------------------------------------- */
 
 const routes = [
-    { path: '/', component: Home, name: 'Home' },
+    { path: '/', component: Home, name: 'Home', props: (route) => ({ page: route.query.page }) },
     { path: '/posts/', component: Posts, name: 'Posts' },
     { path: '/posts/:id', component: Post, name: 'Post', props: (route) => ({ post: _all_posts[route.params.id] }) },
     { path: '/pages/', component: Pages, name: 'Pages' },
