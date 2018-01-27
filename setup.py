@@ -13,8 +13,8 @@ packages = find_packages()
 requires = [
     'blinker',
     'flask',
-    'flask-bootstrap',
     'flask-flatpages',
+    'flask-htmlmin',
     'flask-moment',
     'flask-script',
     'flask-themes',

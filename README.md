@@ -24,7 +24,7 @@ Using `pip`:
 
 Start the local development webserver using:
 
-    $ carnet runserver -d
+    $ carnet -d runserver
 
 Head over to [localhost:5000](http://localhost:5000) and start creating your
 website using the quick-start page!

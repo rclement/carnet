@@ -8,6 +8,7 @@ from flask import Flask, redirect, request, url_for
 from flask_flatpages import FlatPages
 from flask_moment import Moment
 from flask_themes import setup_themes
+from flask_htmlmin import HTMLMIN
 from flask_frozen import Freezer
 
 from .__about__ import (__title__, __version__, __description__, __author__,
@@ -23,6 +24,7 @@ from .utils.render import render_template
 pages = FlatPages(name='pages')
 posts = FlatPages(name='posts')
 moment = Moment()
+minify = HTMLMIN()
 freezer = Freezer(with_no_argument_rules=False, log_url_for=True)
 
 
@@ -124,6 +126,7 @@ def create_app(config_name='default', user_config_file=None, instance_path=None)
     posts.init_app(app)
     moment.init_app(app)
     setup_themes(app)
+    minify.init_app(app)
     freezer.init_app(app)
 
     assets_bp = create_assets_blueprint(app_config.ASSETS_ROOT)

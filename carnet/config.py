@@ -29,6 +29,7 @@ class Config:
 class ProductionConfig(Config):
     DEBUG = False
     TESTING = False
+    MINIFY_PAGE = True
 
 
 class DevelopmentConfig(Config):

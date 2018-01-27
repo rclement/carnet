@@ -8,14 +8,15 @@ name = "pypi"
 [packages]
 
 blinker = "*"
-Flask = "*"
-Flask-FlatPages = "*"
-Flask-Moment = "*"
-Flask-Script = "*"
-Flask-Themes = {path = "git+https://github.com/rclement/flask-themes.git#egg=flask-themes", editable = true}
-Flask-WTF = "*"
-Frozen-Flask = "*"
-Pygments = "*"
+flask = "*"
+flask-flatpages = "*"
+flask-htmlmin = "*"
+flask-moment = "*"
+flask-script = "*"
+flask-themes = {path = "git+https://github.com/rclement/flask-themes.git#egg=flask-themes", editable = true}
+flask-wtf = "*"
+frozen-flask = "*"
+pygments = "*"
 
 
 [dev-packages]
@@ -23,10 +24,10 @@ Pygments = "*"
 coverage = "*"
 docutils = "*"
 "flake8" = "*"
-Flask-Testing = "*"
+flask-testing = "*"
 pytest = "*"
 pytest-cov = "*"
-Sphinx = "*"
+sphinx = "*"
 tox = "*"
 "e1839a8" = {path = ".", editable = true}
 
