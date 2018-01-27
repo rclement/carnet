@@ -502,6 +502,12 @@ const App = {
                     <router-view></router-view>
                 </transition>
             </div>
+
+            <footer class="footer">
+                <div class="container">
+                    <p class="text-muted text-center">Proudly made with Carnet</p>
+                </div>
+            </footer>
         </div>
     `,
 
