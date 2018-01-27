@@ -478,6 +478,20 @@ const Home = {
 
 /* -------------------------------------------------------------------------- */
 
+const PageNotFound = {
+    template: `
+        <div id="page-not-found">
+            <div class="page-header">
+                <h1>Page not found</h1>
+            </div>
+
+            <p>Sorry, but the page you requested does not exist.</p>
+        </div>
+    `
+}
+
+/* -------------------------------------------------------------------------- */
+
 const App = {
     template: `
         <div id="app">
@@ -509,7 +523,8 @@ const routes = [
     { path: '/categories/', component: Categories, name: 'Categories' },
     { path: '/categories/:id', component: Category, name: 'Category', props: (route) => ({ category: _all_categories[route.params.id] }) },
     { path: '/tags/', component: Tags, name: 'Tags' },
-    { path: '/tags/:id', component: Tag, name: 'Tag', props: (route) => ({ tag: _all_tags[route.params.id] }) }
+    { path: '/tags/:id', component: Tag, name: 'Tag', props: (route) => ({ tag: _all_tags[route.params.id] }) },
+    { path: "*", component: PageNotFound, name: 'PageNotFound' }
 ]
 
 const router = new VueRouter({
