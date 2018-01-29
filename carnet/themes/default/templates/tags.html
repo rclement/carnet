@@ -1,11 +1,13 @@
 {% extends theme('_base.html') %}
 
+{% import theme('_utils.html') as utils %}
+
 {% block content %}
 <div class="container">
     <div class="page-header">
         <h1>Tags</h1>
     </div>
 
-    {% include theme('_list_tags.html') %}
+    {{ utils.list_tags(tags) }}
 </div>
 {% endblock content %}

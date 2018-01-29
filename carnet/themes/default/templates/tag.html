@@ -1,5 +1,7 @@
 {% extends theme('_base.html') %}
 
+{% import theme('_utils.html') as utils %}
+
 {% block content %}
 <div class="container">
     <div class="page-header">
@@ -12,7 +14,7 @@
                 <h2>Pages</h2>
                 <hr class="intro-divider">
 
-                {% include theme('_list_pages.html') %}
+                {{ utils.list_pages(pages) }}
             </div>
         </div>
     {% endif %}
@@ -23,7 +25,7 @@
                 <h2>Posts</h2>
                 <hr class="intro-divider">
 
-                {% include theme('_list_posts.html') %}
+                {{ utils.list_posts(posts) }}
             </div>
         </div>
     {% endif %}
