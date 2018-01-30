@@ -11,6 +11,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 packages = find_packages()
 
 requires = [
+    'beautifulsoup4',
     'blinker',
     'flask',
     'flask-flatpages',

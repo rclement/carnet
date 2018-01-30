@@ -10,6 +10,7 @@ from flask_moment import Moment
 from flask_themes import setup_themes
 from flask_htmlmin import HTMLMIN
 from flask_frozen import Freezer
+from .flask_pretty import Prettify
 
 from .__about__ import (__title__, __version__, __description__, __author__,
                         __author_email__, __url__, __license__)
@@ -25,6 +26,7 @@ pages = FlatPages(name='pages')
 posts = FlatPages(name='posts')
 moment = Moment()
 minify = HTMLMIN()
+prettify = Prettify()
 freezer = Freezer(with_no_argument_rules=False, log_url_for=True)
 
 
@@ -127,6 +129,7 @@ def create_app(config_name='default', user_config_file=None, instance_path=None)
     moment.init_app(app)
     setup_themes(app)
     minify.init_app(app)
+    prettify.init_app(app)
     freezer.init_app(app)
 
     assets_bp = create_assets_blueprint(app_config.ASSETS_ROOT)

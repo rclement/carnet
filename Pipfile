@@ -7,6 +7,7 @@ name = "pypi"
 
 [packages]
 
+"beautifulsoup4" = "*"
 blinker = "*"
 flask = "*"
 flask-flatpages = "*"
