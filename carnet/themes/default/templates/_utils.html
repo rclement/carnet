@@ -3,6 +3,7 @@
         <ul>
             <li>
                 <a href="{{ url_for('pages.page', path=p.path) }}">{{ p.title }}</a>
+                | {{ moment(p.meta.published).format('MMMM Do YYYY') }}
 
                 {% if p.meta.tags|length %}
                 | tags:
@@ -30,6 +31,7 @@
         <ul>
             <li>
                 <a href="{{ url_for('posts.post', path=p.path) }}">{{ p.title }}</a>
+                | {{ moment(p.meta.published).format('MMMM Do YYYY, h:mm:ss a') }}
 
                 {% if p.meta.tags|length %}
                 | tags:
@@ -76,4 +78,26 @@
         <h3>No tags</h3>
         <hr class="intro-divider">
     {% endfor %}
+{% endmacro %}
+
+{% macro list_archives(archives=[]) %}
+    {% if archives|length > 0 %}
+        <ul>
+            {% for y in archives %}
+            <li>
+                <a href="{{ url_for('archives.yearly', year=y.date.year) }}">{{ moment(y.date).format('YYYY') }}</a> - {{ y.count }} entries
+                <ul>
+                    {% for m in y.months %}
+                    <li>
+                        <a href="{{ url_for('archives.monthly', year=y.date.year, month=y.date.month) }}">{{ moment(m.date).format('MMMM') }}</a> - {{ m.count }} entries
+                    </li>
+                    {% endfor %}
+                </ul>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h3>No archives</h3>
+        <hr class="intro-divider">
+    {% endif %}
 {% endmacro %}

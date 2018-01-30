@@ -1,15 +1,26 @@
+from collections import Counter, OrderedDict
+from datetime import date
+
 from flask import current_app
 
 from .. import pages, posts
 
 
+_meta_title = 'title'
+_meta_author = 'author'
+_meta_published = 'published'
+_meta_categories = 'categories'
+_meta_tags = 'tags'
+_meta_header_image = 'header-image'
+
+
 def get_all_pages():
     published_pages = [
-        p for p in pages if p.meta.get('published', None) is not None
+        p for p in pages if p.meta.get(_meta_published, None) is not None
     ]
 
     sorted_pages = sorted(
-        published_pages, reverse=True, key=lambda p: p.meta['published']
+        published_pages, reverse=True, key=lambda p: p.meta[_meta_published]
     )
     return sorted_pages
 
@@ -20,21 +31,22 @@ def get_page(path):
 
 def get_tagged_pages(tag):
     all_pages = get_all_pages()
-    return [p for p in all_pages if tag in p.meta.get('tags', [])]
+    return [p for p in all_pages if tag in p.meta.get(_meta_tags, [])]
 
 
 def get_categorized_pages(category):
     all_pages = get_all_pages()
-    return [p for p in all_pages if category in p.meta.get('categories', [])]
+    return [p for p in all_pages
+            if category in p.meta.get(_meta_categories, [])]
 
 
 def get_all_posts():
     published_posts = [
-        p for p in posts if p.meta.get('published', None) is not None
+        p for p in posts if p.meta.get(_meta_published, None) is not None
     ]
 
     sorted_posts = sorted(
-        published_posts, reverse=True, key=lambda p: p.meta['published']
+        published_posts, reverse=True, key=lambda p: p.meta[_meta_published]
     )
     return sorted_posts
 
@@ -44,11 +56,11 @@ def get_latest_posts(offset=None):
         offset = 0
 
     published_posts = [
-        p for p in posts if p.meta.get('published', None) is not None
+        p for p in posts if p.meta.get(_meta_published, None) is not None
     ]
 
     sorted_posts = sorted(
-        published_posts, reverse=True, key=lambda p: p.meta['published']
+        published_posts, reverse=True, key=lambda p: p.meta[_meta_published]
     )
 
     num_posts = len(sorted_posts)
@@ -68,18 +80,19 @@ def get_post(path):
 
 def get_tagged_posts(tag):
     all_posts = get_all_posts()
-    return [p for p in all_posts if tag in p.meta.get('tags', [])]
+    return [p for p in all_posts if tag in p.meta.get(_meta_tags, [])]
 
 
 def get_categorized_posts(category):
     all_posts = get_all_posts()
-    return [p for p in all_posts if category in p.meta.get('categories', [])]
+    return [p for p in all_posts
+            if category in p.meta.get(_meta_categories, [])]
 
 
 def get_all_categories():
     def fill_categories(items):
         for i in items:
-            cats = i.meta.get('categories', None)
+            cats = i.meta.get(_meta_categories, None)
             if cats:
                 for c in cats:
                     category = {
@@ -101,7 +114,7 @@ def get_all_categories():
 def get_all_tags():
     def fill_tags(items):
         for i in items:
-            tags = i.meta.get('tags', None)
+            tags = i.meta.get(_meta_tags, None)
             if tags:
                 for t in tags:
                     tag = {
@@ -120,6 +133,55 @@ def get_all_tags():
     )
 
 
+def get_archives():
+    all_posts = get_all_posts()
+
+    dated_posts = [
+        (p.meta[_meta_published].year, p.meta[_meta_published].month, p)
+        for p in all_posts if p.meta.get(_meta_published)
+    ]
+
+    dates = [(p.meta[_meta_published].year, p.meta[_meta_published].month)
+             for p in all_posts if p.meta.get(_meta_published)]
+
+    yearly = sorted(Counter([d[0] for d in dates]).items(), reverse=True)
+    monthly = sorted(Counter([d for d in dates]).items(), reverse=True)
+
+    archives = []
+    for y in yearly:
+        year = y[0]
+        year_count = y[1]
+        year_archive = {
+            'date': date(year=year, month=1, day=1),
+            'count': year_count,
+            'months': [
+                {
+                    'date': date(year=year, month=m[0][1], day=1),
+                    'count': m[1],
+                    'posts': [
+                        p for p in dated_posts
+                        if p[0] == year and p[1] == m[0][1]
+                    ]
+                } for m in monthly if m[0][0] == year
+            ]
+        }
+        archives.append(year_archive)
+
+    return archives
+
+
+def get_yearly_posts(year):
+    all_posts = get_all_posts()
+    return [p for p in all_posts if p.meta.get(_meta_published).year == year]
+
+
+def get_monthly_posts(year, month):
+    all_posts = get_all_posts()
+    return [p for p in all_posts
+            if p.meta.get(_meta_published).year == year
+            and p.meta.get(_meta_published).month == month]
+
+
 def get_global_config():
     return {
         'debug': current_app.config.get('DEBUG', False),
@@ -131,4 +193,5 @@ def get_global_config():
         'all_posts': get_all_posts(),
         'all_categories': get_all_categories(),
         'all_tags': get_all_tags(),
+        'archives': get_archives(),
     }

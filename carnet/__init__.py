@@ -136,6 +136,7 @@ def create_app(config_name='default', user_config_file=None, instance_path=None)
     app.register_blueprint(assets_bp)
 
     from .views.admin import bp as admin_bp
+    from .views.archives import bp as archives_bp
     from .views.categories import bp as categories_bp
     from .views.home import bp as home_bp
     from .views.pages import bp as pages_bp
@@ -143,6 +144,7 @@ def create_app(config_name='default', user_config_file=None, instance_path=None)
     from .views.quickstart import bp as quickstart_bp
     from .views.tags import bp as tags_bp
     app.register_blueprint(admin_bp)
+    app.register_blueprint(archives_bp)
     app.register_blueprint(categories_bp)
     app.register_blueprint(home_bp)
     app.register_blueprint(pages_bp)

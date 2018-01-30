@@ -7,7 +7,7 @@
             <h1>{{ page.title }}</h1>
 
             <p class="text-muted">
-                Published by {{ page.meta.author }} on {{ page.meta.published }}
+                Published by {{ page.meta.author }} on {{ moment(page.meta.published).format('MMMM Do YYYY') }}
                 <br/>
                 Categories: {% for c in page.meta.categories %}<a href="{{ url_for('categories.category', category_name=c) }}">{{ c }}</a> {% endfor %}
                 <br/>
