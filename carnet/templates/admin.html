@@ -1,0 +1,30 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<div id="app"></div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{% if global_config.debug %}
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+{% else %}
+<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.min.js"></script>
+{% endif %}
+<script>
+    var flashedMessages = []
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                flashedMessages.push({
+                    category: '{{ category }}',
+                    message: '{{ message }}'
+                })
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</script>
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}
