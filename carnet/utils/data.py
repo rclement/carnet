@@ -178,8 +178,8 @@ def get_yearly_posts(year):
 def get_monthly_posts(year, month):
     all_posts = get_all_posts()
     return [p for p in all_posts
-            if p.meta.get(_meta_published).year == year
-            and p.meta.get(_meta_published).month == month]
+            if p.meta.get(_meta_published).year == year and
+            p.meta.get(_meta_published).month == month]
 
 
 def get_global_config():
