@@ -10,7 +10,7 @@ from flask_moment import Moment
 from flask_themes import setup_themes
 from flask_htmlmin import HTMLMIN
 from flask_frozen import Freezer
-from .flask_pretty import Prettify
+from flask_pretty import Prettify
 
 from .__about__ import (__title__, __version__, __description__, __author__,
                         __author_email__, __url__, __license__)

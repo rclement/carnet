@@ -35,14 +35,14 @@ class ProductionConfig(Config):
 class DevelopmentConfig(Config):
     DEBUG = True
     TESTING = False
-    PRETTIFY_PAGE = True
+    PRETTIFY = True
 
 
 class TestingConfig(Config):
     DEBUG = True
     TESTING = True
     WTF_CSRF_ENABLED = False
-    PRETTIFY_PAGE = True
+    PRETTIFY = True
 
 
 def get_app_config(config='default'):

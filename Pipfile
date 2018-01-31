@@ -13,6 +13,7 @@ flask = "*"
 flask-flatpages = "*"
 flask-htmlmin = "*"
 flask-moment = "*"
+flask-pretty = "*"
 flask-script = "*"
 flask-themes = {path = "git+https://github.com/rclement/flask-themes.git#egg=flask-themes", editable = true}
 flask-wtf = "*"
