@@ -89,7 +89,7 @@
                 <ul>
                     {% for m in y.months %}
                     <li>
-                        <a href="{{ url_for('archives.monthly', year=y.date.year, month=y.date.month) }}">{{ moment(m.date).format('MMMM') }}</a> - {{ m.count }} entries
+                        <a href="{{ url_for('archives.monthly', year=m.date.year, month=m.date.month) }}">{{ moment(m.date).format('MMMM') }}</a> - {{ m.count }} entries
                     </li>
                     {% endfor %}
                 </ul>

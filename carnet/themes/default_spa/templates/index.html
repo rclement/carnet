@@ -108,6 +108,68 @@
             {% endfor %}
             }
 
+            var _archives_monthly = {
+            {% for a in global_config.archives %}
+                '{{ a.date.year }}': {
+                    {% for m in a.months %}
+                        '{{ m.date.month }}': {
+                            yearId: '{{ m.date.year }}',
+                            year: moment('{{ m.date }}').format('YYYY'),
+                            monthId: '{{ m.date.month }}',
+                            month: moment('{{ m.date }}').format('MMMM'),
+                            posts: [
+                            {% for p in m.posts %}
+                                _all_posts['{{ p.path }}'],
+                            {% endfor %}
+                            ]
+                        },
+                    {% endfor %}
+                },
+            {% endfor %}
+            }
+
+            var _archives_yearly = {
+            {% for a in global_config.archives %}
+                '{{ a.date.year }}': {
+                    yearId: '{{ a.date.year }}',
+                    year: moment('{{ a.date }}').format('YYYY'),
+                    posts: [
+                    {% for m in a.months %}
+                    {% for p in m.posts %}
+                        _all_posts['{{ p.path }}'],
+                    {% endfor %}
+                    {% endfor %}
+                    ]
+                },
+            {% endfor %}
+            }
+
+            var _archives = {
+            {% for a in global_config.archives %}
+                '{{ a.date.year }}': {
+                    yearId: '{{ a.date.year }}',
+                    year: moment('{{ a.date }}').format('YYYY'),
+                    count: '{{ a.count }}',
+                    months: [
+                    {% for m in a.months %}
+                        {
+                            yearId: '{{ m.date.year }}',
+                            year: moment('{{ m.date }}').format('YYYY'),
+                            monthId: '{{ m.date.month }}',
+                            month: moment('{{ m.date }}').format('MMMM'),
+                            count: '{{ m.count }}',
+                            posts: [
+                                {% for p in m.posts %}
+                                    _all_posts['{{ p.path }}'],
+                                {% endfor %}
+                            ]
+                        },
+                    {% endfor %}
+                    ]
+                },
+            {% endfor %}
+            }
+
             var global_config = {
                 title: '{{ global_config.title }}',
                 subtitle: '{{ global_config.subtitle }}',
@@ -132,6 +194,11 @@
                     _all_tags['{{ t.name }}'],
                     {% endfor %}
                 ],
+                archives: [
+                    {% for a in global_config.archives %}
+                    _archives['{{ a.date.year }}'],
+                    {% endfor %}
+                ]
             }
         </script>
         <script src="{{ theme_static('js/app.js') }}"></script>

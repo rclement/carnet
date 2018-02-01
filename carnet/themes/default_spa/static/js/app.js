@@ -56,6 +56,8 @@ Vue.component('navbar-component', {
                             </ul>
                         </li>
 
+                        <li><router-link :to="{ name: 'Archives' }">Archives</router-link></li>
+
                         <li class="dropdown">
                             <a href="#"
                                class="dropdown-toggle"
@@ -192,6 +194,31 @@ Vue.component('tags-list', {
     `,
 
     props: ['tags']
+})
+
+/* -------------------------------------------------------------------------- */
+
+Vue.component('archives-list', {
+    template: `
+        <div v-if="archives.length > 0" id="archives-list">
+            <ul>
+                <li v-for="y in archives">
+                    <router-link :to="{ name: 'ArchivesYearly', params: { year: y.yearId } }">{{ y.year }}</router-link> - {{ y.count }} entries
+                    <ul>
+                        <li v-for="m in y.months">
+                            <router-link :to="{ name: 'ArchivesMonthly', params: { year: m.yearId, month: m.monthId } }">{{ m.month }}</router-link> - {{ m.count }} entries
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div v-else id="archives-list">
+            <h3>No archives</h3>
+            <hr class="intro-divider">
+        </div>
+    `,
+
+    props: ['archives']
 })
 
 /* -------------------------------------------------------------------------- */
@@ -388,6 +415,68 @@ const Tags = {
 
 /* -------------------------------------------------------------------------- */
 
+const ArchivesMonthly = {
+    template: `
+        <div id="archives-monthly">
+            <div class="page-header">
+                <h1>Archives for <em>{{ archives.month }} {{ archives.year }}</em></h1>
+            </div>
+
+            <div v-if="archives.posts.length > 0" class="row">
+                <div class="col-md-12">
+                    <h2>Posts</h2>
+                    <hr class="intro-divider">
+
+                    <posts-list :posts="archives.posts"></posts-list>
+                </div>
+            </div>
+        </div>
+    `,
+
+    props: ['archives']
+}
+
+const ArchivesYearly = {
+    template: `
+        <div id="archives-yearly">
+            <div class="page-header">
+                <h1>Archives for <em>{{ archives.year }}</em></h1>
+            </div>
+
+            <div v-if="archives.posts.length > 0" class="row">
+                <div class="col-md-12">
+                    <h2>Posts</h2>
+                    <hr class="intro-divider">
+
+                    <posts-list :posts="archives.posts"></posts-list>
+                </div>
+            </div>
+        </div>
+    `,
+
+    props: ['archives']
+}
+
+const Archives = {
+    template: `
+        <div id="archives">
+            <div class="page-header">
+                <h1>Archives</h1>
+            </div>
+
+            <archives-list :archives="config.archives"></archives-list>
+        </div>
+    `,
+
+    data: function() {
+        return {
+            config: global_config
+        }
+    }
+}
+
+/* -------------------------------------------------------------------------- */
+
 const Home = {
     template: `
         <div id="home">
@@ -530,6 +619,9 @@ const routes = [
     { path: '/categories/:id', component: Category, name: 'Category', props: (route) => ({ category: _all_categories[route.params.id] }) },
     { path: '/tags/', component: Tags, name: 'Tags' },
     { path: '/tags/:id', component: Tag, name: 'Tag', props: (route) => ({ tag: _all_tags[route.params.id] }) },
+    { path: '/archives/', component: Archives, name: 'Archives' },
+    { path: '/archives/:year', component: ArchivesYearly, name: 'ArchivesYearly', props: (route) => ({ archives: _archives_yearly[route.params.year] }) },
+    { path: '/archives/:year/:month', component: ArchivesMonthly, name: 'ArchivesMonthly', props: (route) => ({ archives: _archives_monthly[route.params.year][route.params.month] }) },
     { path: "*", component: PageNotFound, name: 'PageNotFound' }
 ]
 

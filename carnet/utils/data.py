@@ -159,7 +159,7 @@ def get_archives():
                     'date': date(year=year, month=m[0][1], day=1),
                     'count': m[1],
                     'posts': [
-                        p for p in dated_posts
+                        p[2] for p in dated_posts
                         if p[0] == year and p[1] == m[0][1]
                     ]
                 } for m in monthly if m[0][0] == year
