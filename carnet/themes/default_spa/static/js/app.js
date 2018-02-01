@@ -113,8 +113,8 @@ Vue.component('navbar-component', {
 Vue.component('posts-list', {
     template: `
         <div v-if="posts.length > 0" id="posts-list">
-            <ul v-for="p in posts">
-                <li>
+            <ul>
+                <li v-for="p in posts">
                     <router-link :to="{ name: 'Post', params: { id: p.path } }">{{ p.title }}</router-link>
                     <span v-if="p.tags.length > 0">| tags:</span>
                     <router-link v-for="t in p.tags" :key="t" :to="{ name: 'Tag', params: { id: t } }">{{ t }} </router-link>
@@ -137,8 +137,8 @@ Vue.component('posts-list', {
 Vue.component('pages-list', {
     template: `
         <div v-if="pages.length > 0" id="pages-list">
-            <ul v-for="p in pages">
-                <li>
+            <ul>
+                <li v-for="p in pages">
                     <router-link :to="{ name: 'Page', params: { id: p.path } }">{{ p.title }}</router-link>
                     <span v-if="p.tags.length > 0">| tags:</span>
                     <router-link v-for="t in p.tags" :key="t" :to="{ name: 'Tag', params: { id: t } }">{{ t }} </router-link>
@@ -161,8 +161,8 @@ Vue.component('pages-list', {
 Vue.component('categories-list', {
     template: `
         <div v-if="categories.length > 0" id="categories-list">
-            <ul v-for="c in categories">
-                <li>
+            <ul>
+                <li v-for="c in categories">
                     <router-link :to="{ name: 'Category', params: { id: c.name } }">{{ c.name }}</router-link>
                 </li>
             </ul>
@@ -181,8 +181,8 @@ Vue.component('categories-list', {
 Vue.component('tags-list', {
     template: `
         <div v-if="tags.length > 0" id="tags-list">
-            <ul v-for="t in tags">
-                <li>
+            <ul>
+                <li v-for="t in tags">
                     <router-link :to="{ name: 'Tag', params: { id: t.name } }">{{ t.name }}</router-link>
                 </li>
             </ul>

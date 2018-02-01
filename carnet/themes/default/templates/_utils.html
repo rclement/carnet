@@ -1,103 +1,111 @@
 {% macro list_pages(pages=[]) %}
-    {% for p in pages %}
-        <ul>
-            <li>
-                <a href="{{ url_for('pages.page', path=p.path) }}">{{ p.title }}</a>
-                | {{ moment(p.meta.published).format('MMMM Do YYYY') }}
+    {% if pages|length > 0 %}
+    <ul>
+        {% for p in pages %}
+        <li>
+            <a href="{{ url_for('pages.page', path=p.path) }}">{{ p.title }}</a>
+            | {{ moment(p.meta.published).format('MMMM Do YYYY') }}
 
-                {% if p.meta.tags|length %}
-                | tags:
-                    {% for t in p.meta.tags %}
-                        <a href="{{ url_for('tags.tag', tag_name=t) }}">{{ t }}</a>
-                    {% endfor %}
-                {% endif %}
+            {% if p.meta.tags|length %}
+            | tags:
+                {% for t in p.meta.tags %}
+                    <a href="{{ url_for('tags.tag', tag_name=t) }}">{{ t }}</a>
+                {% endfor %}
+            {% endif %}
 
-                {% if p.meta.categories|length %}
-                | categories:
-                    {% for c in p.meta.categories %}
-                        <a href="{{ url_for('categories.category', category_name=c) }}">{{ c }}</a>
-                    {% endfor %}
-                {% endif %}
-            </li>
-        </ul>
+            {% if p.meta.categories|length %}
+            | categories:
+                {% for c in p.meta.categories %}
+                    <a href="{{ url_for('categories.category', category_name=c) }}">{{ c }}</a>
+                {% endfor %}
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
     {% else %}
-        <h3>No pages</h3>
-        <hr class="intro-divider">
-    {% endfor %}
+    <h3>No pages</h3>
+    <hr class="intro-divider">
+    {% endif %}
 {% endmacro %}
 
 {% macro list_posts(posts=[]) %}
-    {% for p in posts %}
-        <ul>
-            <li>
-                <a href="{{ url_for('posts.post', path=p.path) }}">{{ p.title }}</a>
-                | {{ moment(p.meta.published).format('MMMM Do YYYY, h:mm:ss a') }}
+    {% if posts|length > 0 %}
+    <ul>
+        {% for p in posts %}
+        <li>
+            <a href="{{ url_for('posts.post', path=p.path) }}">{{ p.title }}</a>
+            | {{ moment(p.meta.published).format('MMMM Do YYYY, h:mm:ss a') }}
 
-                {% if p.meta.tags|length %}
-                | tags:
-                    {% for t in p.meta.tags %}
-                        <a href="{{ url_for('tags.tag', tag_name=t) }}">{{ t }}</a>
-                    {% endfor %}
-                {% endif %}
+            {% if p.meta.tags|length %}
+            | tags:
+                {% for t in p.meta.tags %}
+                    <a href="{{ url_for('tags.tag', tag_name=t) }}">{{ t }}</a>
+                {% endfor %}
+            {% endif %}
 
-                {% if p.meta.categories|length %}
-                | categories:
-                    {% for c in p.meta.categories %}
-                        <a href="{{ url_for('categories.category', category_name=c) }}">{{ c }}</a>
-                    {% endfor %}
-                {% endif %}
-            </li>
-        </ul>
+            {% if p.meta.categories|length %}
+            | categories:
+                {% for c in p.meta.categories %}
+                    <a href="{{ url_for('categories.category', category_name=c) }}">{{ c }}</a>
+                {% endfor %}
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
     {% else %}
-        <h3>No posts</h3>
-        <hr class="intro-divider">
-    {% endfor %}
+    <h3>No posts</h3>
+    <hr class="intro-divider">
+    {% endif %}
 {% endmacro %}
 
 {% macro list_categories(categories=[]) -%}
-    {% for c in categories %}
-        <ul>
-            <li>
-                <a href="{{ url_for('categories.category', category_name=c.name) }}">{{ c.name }}</a>
-            </li>
-        </ul>
+    {% if categories|length > 0 %}
+    <ul>
+        {% for c in categories %}
+        <li>
+            <a href="{{ url_for('categories.category', category_name=c.name) }}">{{ c.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
     {% else %}
-        <h3>No categories</h3>
-        <hr class="intro-divider">
-    {% endfor %}
+    <h3>No categories</h3>
+    <hr class="intro-divider">
+    {% endif %}
 {%- endmacro %}
 
 {% macro list_tags(tags=[]) %}
-    {% for t in tags %}
-        <ul>
-            <li>
-                <a href="{{ url_for('tags.tag', tag_name=t.name) }}">{{ t.name }}</a>
-            </li>
-        </ul>
+    {% if tags|length > 0 %}
+    <ul>
+        {% for t in tags %}
+        <li>
+            <a href="{{ url_for('tags.tag', tag_name=t.name) }}">{{ t.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
     {% else %}
-        <h3>No tags</h3>
-        <hr class="intro-divider">
-    {% endfor %}
+    <h3>No tags</h3>
+    <hr class="intro-divider">
+    {% endif %}
 {% endmacro %}
 
 {% macro list_archives(archives=[]) %}
     {% if archives|length > 0 %}
-        <ul>
-            {% for y in archives %}
-            <li>
-                <a href="{{ url_for('archives.yearly', year=y.date.year) }}">{{ moment(y.date).format('YYYY') }}</a> - {{ y.count }} entries
-                <ul>
-                    {% for m in y.months %}
-                    <li>
-                        <a href="{{ url_for('archives.monthly', year=m.date.year, month=m.date.month) }}">{{ moment(m.date).format('MMMM') }}</a> - {{ m.count }} entries
-                    </li>
-                    {% endfor %}
-                </ul>
-            </li>
-            {% endfor %}
-        </ul>
+    <ul>
+        {% for y in archives %}
+        <li>
+            <a href="{{ url_for('archives.yearly', year=y.date.year) }}">{{ moment(y.date).format('YYYY') }}</a> - {{ y.count }} entries
+            <ul>
+                {% for m in y.months %}
+                <li>
+                    <a href="{{ url_for('archives.monthly', year=m.date.year, month=m.date.month) }}">{{ moment(m.date).format('MMMM') }}</a> - {{ m.count }} entries
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
     {% else %}
-        <h3>No archives</h3>
-        <hr class="intro-divider">
+    <h3>No archives</h3>
+    <hr class="intro-divider">
     {% endif %}
 {% endmacro %}
