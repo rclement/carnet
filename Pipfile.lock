@@ -332,6 +332,12 @@
             ],
             "version": "==0.6.0"
         },
+        "flask-pretty": {
+            "hashes": [
+                "sha256:1907ddd8085e9b0b63774eb151f223ee3c30b316fb0b23c801fcd371c7abd6f8"
+            ],
+            "version": "==0.2.0"
+        },
         "flask-script": {
             "hashes": [
                 "sha256:6425963d91054cfcc185807141c7314a9c5ad46325911bd24dcb489bd0161c65"

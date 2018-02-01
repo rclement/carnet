@@ -17,6 +17,7 @@ requires = [
     'flask-flatpages',
     'flask-htmlmin',
     'flask-moment',
+    'flask-pretty',
     'flask-script',
     'flask-themes',
     'flask-wtf',
