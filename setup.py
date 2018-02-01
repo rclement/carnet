@@ -31,7 +31,7 @@ tests_require = [
 ]
 
 dependency_links = [
-    'https://github.com/rclement/flask-themes.git@fix-integration-flask-0.12#egg=flask-themes'
+    'https://github.com/rclement/flask-themes.git#egg=flask-themes'
 ]
 
 entry_points = {
