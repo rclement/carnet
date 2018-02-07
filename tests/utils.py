@@ -2,6 +2,7 @@ import os
 import json
 import shutil
 
+from codecs import open
 from flask_testing import TestCase
 
 from carnet import create_app
@@ -31,7 +32,7 @@ def test_user_config():
 def create_user_config():
     user_config = test_user_config()
     user_config_path = absolute_path(test_user_config_file)
-    with open(user_config_path, mode='w', encoding='utf-8') as f:
+    with open(user_config_path, 'w', 'utf-8') as f:
         json.dump(user_config, f, indent=4)
     return user_config
 

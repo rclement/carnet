@@ -103,7 +103,7 @@ def create_instance_config(instance_config_file):
         if not os.path.isdir(instance_dir):
             os.makedirs(instance_dir)
 
-        with open(instance_config_file, mode='w', encoding='utf-8') as f:
+        with open(instance_config_file, 'w', 'utf-8') as f:
             f.write(instance_config_text)
 
 

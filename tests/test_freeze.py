@@ -4,7 +4,8 @@ from warnings import simplefilter as filter_warnings
 from flask_frozen import MissingURLGeneratorWarning
 
 from carnet import freezer
-from tests.utils import TestAppConfigured
+
+from .utils import TestAppConfigured
 
 
 filter_warnings('ignore', MissingURLGeneratorWarning)

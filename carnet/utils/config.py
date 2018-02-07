@@ -24,7 +24,7 @@ def load_user_config(user_config_file):
 
     app_config_path = absolute_path(user_config_file)
     if os.path.isfile(app_config_path):
-        with open(app_config_path, mode='r', encoding='utf-8') as f:
+        with open(app_config_path, 'r', 'utf-8') as f:
             app_config = json.load(f)
 
     return app_config
@@ -54,7 +54,7 @@ def save_app_config():
     }
 
     app_config_path = get_app_config_path()
-    with open(app_config_path, mode='w', encoding='utf-8') as f:
+    with open(app_config_path, 'w', 'utf-8') as f:
         json.dump(app_config, f, indent=4)
 
 

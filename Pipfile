@@ -31,6 +31,7 @@ pytest-cov = "*"
 sphinx = "*"
 tox = "*"
 "e1839a8" = {path = ".", editable = true}
+funcsigs = "*"
 
 
 [requires]

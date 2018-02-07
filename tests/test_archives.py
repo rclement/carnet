@@ -2,7 +2,7 @@ import unittest
 
 from datetime import date
 
-from tests.utils import (TestAppConfigured, TestAppNotConfigured)
+from .utils import (TestAppConfigured, TestAppNotConfigured)
 
 
 class TestArchivesConfigured(TestAppConfigured):

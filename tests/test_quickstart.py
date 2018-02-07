@@ -1,6 +1,6 @@
 import unittest
 
-from tests.utils import TestAppNotConfigured
+from .utils import TestAppNotConfigured
 
 
 class TestQuickstart(TestAppNotConfigured):

@@ -40,10 +40,10 @@ entry_points = {
 }
 
 about = {}
-with open(os.path.join(here, 'carnet', '__about__.py'), mode='r', encoding='utf-8') as f:
+with open(os.path.join(here, 'carnet', '__about__.py'), 'r', 'utf-8') as f:
     exec(f.read(), about)
 
-with open('README.rst', mode='r', encoding='utf-8') as f:
+with open('README.rst', 'r', 'utf-8') as f:
     readme = f.read()
 
 
