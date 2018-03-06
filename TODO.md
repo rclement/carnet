@@ -16,9 +16,10 @@
 [ ] Homepage content (posts, selected special page)
 [ ] Add pages for Author (list all its posts and pages) and Authors (list all authors)
 [ ] User defined theme support
-[ ] carnet-themes package? (with detection)
+[ ] carnet-themes package? (with automatic package detection and inspection)
 [ ] ghp-import support?
 [ ] UE Cookie Law Banner support
 [ ] Google Analytics support
 [ ] Google AdSense support
 [ ] Monero/CoinHive support (with CPU gauge?)
+[ ] Use Bootstrap 4
