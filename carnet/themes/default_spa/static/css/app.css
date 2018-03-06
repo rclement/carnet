@@ -22,3 +22,11 @@ body {
 .footer .container .text-muted {
   margin: 20px 0;
 }
+
+.router-fade-enter-active, .router-fade-leave-active {
+  transition: opacity .2s ease
+}
+
+.router-fade-enter, .router-fade-leave-to {
+  opacity: 0
+}
