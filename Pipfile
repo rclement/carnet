@@ -14,7 +14,7 @@ flask-htmlmin = "*"
 flask-moment = "*"
 flask-pretty = "*"
 flask-script = "*"
-flask-themes = {path = "git+https://github.com/rclement/flask-themes.git#egg=flask-themes", editable = true}
+flask-themes = {git = "https://github.com/rclement/flask-themes.git", ref = "master", editable = true}
 flask-wtf = "*"
 frozen-flask = "*"
 pygments = "*"

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "1ee9b131cad715ef8802da9409f098625994028e8af69a19b96d205f4e875cde"
+            "sha256": "2c400af3b95b08441f02d1df38d8e134491338032de1ea8adcc1dd0c745d5dd6"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -83,7 +83,8 @@
         },
         "flask-themes": {
             "editable": true,
-            "path": "git+https://github.com/rclement/flask-themes.git#egg=flask-themes"
+            "git": "https://github.com/rclement/flask-themes.git",
+            "ref": "master"
         },
         "flask-wtf": {
             "hashes": [
