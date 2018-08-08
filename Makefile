@@ -12,8 +12,6 @@ develop:
 
 lock:
 	pipenv lock
-	pipenv lock -r > requirements.txt
-	pipenv lock -r -d > requirements-dev.txt
 
 dist:
 	python setup.py sdist bdist_wheel
