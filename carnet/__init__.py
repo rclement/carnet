@@ -70,7 +70,8 @@ def register_freezer_generators(spa_theme):
                 ('categories.categories', {})
             ]
             urls.extend([
-                ('categories.category', {'category_name': c['name']}) for c in all_categories
+                ('categories.category', {'category_name': c['name']})
+                for c in all_categories
             ])
             return urls
 
@@ -107,7 +108,9 @@ def create_instance_config(instance_config_file):
             f.write(instance_config_text)
 
 
-def create_app(config_name='default', user_config_file=None, instance_path=None):
+def create_app(
+    config_name='default', user_config_file=None, instance_path=None
+):
     app_kwargs = {}
     if instance_path:
         app_kwargs['instance_path'] = absolute_path(instance_path)

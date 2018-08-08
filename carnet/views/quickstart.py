@@ -37,7 +37,9 @@ def quickstart():
         save_app_config()
         create_app_folders()
 
-        flash('Configuration file created in \'' + get_app_config_path() + '\'')
+        flash(
+            'Configuration file created in \'' + get_app_config_path() + '\''
+        )
         return redirect(url_for('home.index'))
 
     form.title.data = current_app.config.get('TITLE')
